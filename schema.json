@@ -452,7 +452,6 @@
       "name": "Image",
       "schema": {
         "type": "object",
-        "@tag": "image",
         "properties": {
           "width": {
             "type": "number"
