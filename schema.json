@@ -1,8 +1,7 @@
 {
   "schemaVersion": "3",
-  "workflows": {},
   "created": "2017-07-13T19:16:10.801Z",
-  "updated": "2018-09-08T20:16:45.814Z",
+  "workflows": {},
   "services": {
     "shopify:seans-store-takeshape": {
       "params": {
@@ -52,6 +51,37 @@
       "type": "PaginatedList<Post>",
       "resolver": "takeshape:list",
       "source": "takeshape:self:Post"
+    },
+    "listProducts": {
+      "resolver": "graphql:query",
+      "queryArgs": {
+        "type": "object",
+        "properties": {
+          "after": {
+            "type": "string",
+            "description": "Returns the elements that come after the specified cursor."
+          },
+          "last": {
+            "type": "integer",
+            "description": "Returns up to the last `n` elements from the list."
+          },
+          "reverse": {
+            "type": "boolean",
+            "description": "Reverse the order of the underlying list."
+          },
+          "before": {
+            "type": "string",
+            "description": "Returns the elements that come before the specified cursor."
+          },
+          "first": {
+            "type": "integer",
+            "description": "Returns up to the first `n` elements from the list."
+          }
+        }
+      },
+      "source": "shopify:seans-store-takeshape:Product",
+      "type": "ProductConnection",
+      "query": "products"
     }
   },
   "dataKey": "AQIDAHhcZWXOdlBglkxBhI23ElO/clC/kuw5ynjXDSqJgfTz8gFvrYhMK581OOYYSjJNwit9AAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMPLnOWQxVHD5AzgXdAgEQgDu0ANKQTBQ7dNFJEQcd2aOfZncgw7DjUasC+7Yp2ci0Y2+ZmbbtIa2kcHBt8eriFPR28uwgnvDzn8t6Qw==",
@@ -110,56 +140,6 @@
     }
   },
   "shapes": {
-    "ProductInput": {
-      "title": "Product Input",
-      "name": "ProductInput",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "vendor": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "descriptionHtml": {
-            "type": "string",
-            "@tag": "html"
-          },
-          "handle": {
-            "type": "string"
-          },
-          "seo": {
-            "type": "object",
-            "properties": {
-              "title": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              }
-            }
-          },
-          "title": {
-            "type": "string",
-            "@tag": "title"
-          },
-          "productType": {
-            "type": "string"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "required": [
-          "title"
-        ]
-      },
-      "id": "productInput"
-    },
     "TSColorRgb": {
       "name": "TSColorRgb",
       "schema": {
@@ -181,50 +161,6 @@
       },
       "id": "TSColorRgb",
       "title": "Color Rgb"
-    },
-    "TSColorHsl": {
-      "name": "TSColorHsl",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "h": {
-            "type": "number"
-          },
-          "a": {
-            "type": "number"
-          },
-          "s": {
-            "type": "number"
-          },
-          "l": {
-            "type": "number"
-          }
-        }
-      },
-      "id": "TSColorHsl",
-      "title": "Color Hsl"
-    },
-    "TSColor": {
-      "name": "TSColor",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "hsl": {
-            "$ref": "#/shapes/TSColorHsl/schema"
-          },
-          "hex": {
-            "type": "string"
-          },
-          "hsv": {
-            "$ref": "#/shapes/TSColorHsv/schema"
-          },
-          "rgb": {
-            "$ref": "#/shapes/TSColorRgb/schema"
-          }
-        }
-      },
-      "id": "TSColor",
-      "title": "Color"
     },
     "TSRelationship": {
       "name": "TSRelationship",
@@ -331,19 +267,6 @@
       "id": "postContentTypeId",
       "title": "Post"
     },
-    "ProductCreatePayload": {
-      "title": "Product Create Payload",
-      "name": "ProductCreatePayload",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "product": {
-            "$ref": "#/shapes/Product/schema"
-          }
-        }
-      },
-      "id": "shopifyProductCreatePayload"
-    },
     "Product": {
       "name": "Product",
       "schema": {
@@ -425,29 +348,6 @@
       "id": "shopifyProduct",
       "title": "Product"
     },
-    "Tag": {
-      "name": "Tag",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "@source": {
-              "path": "nameId",
-              "service": "takeshape:local:self"
-            }
-          }
-        },
-        "required": [
-          "name"
-        ]
-      },
-      "model": {
-        "type": "taxonomy"
-      },
-      "id": "tagContentTypeId",
-      "title": "Tag"
-    },
     "Image": {
       "name": "Image",
       "schema": {
@@ -492,9 +392,192 @@
       },
       "id": "TSColorHsv",
       "title": "Color Hsv"
+    },
+    "ProductInput": {
+      "name": "ProductInput",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "vendor": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "descriptionHtml": {
+            "type": "string",
+            "@tag": "html"
+          },
+          "handle": {
+            "type": "string"
+          },
+          "seo": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "title": {
+            "type": "string",
+            "@tag": "title"
+          },
+          "productType": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "id": "productInput",
+      "title": "Product Input"
+    },
+    "ProductConnection": {
+      "name": "ProductConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ProductEdge/schema"
+            }
+          },
+          "pageInfo": {
+            "type": "object",
+            "properties": {
+              "hasNextPage": {
+                "type": "boolean"
+              },
+              "hasPreviousPage": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "hasNextPage",
+              "hasPreviousPage"
+            ]
+          }
+        },
+        "required": []
+      },
+      "id": "productConnection",
+      "title": "Product Connection"
+    },
+    "TSColorHsl": {
+      "name": "TSColorHsl",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "h": {
+            "type": "number"
+          },
+          "a": {
+            "type": "number"
+          },
+          "s": {
+            "type": "number"
+          },
+          "l": {
+            "type": "number"
+          }
+        }
+      },
+      "id": "TSColorHsl",
+      "title": "Color Hsl"
+    },
+    "TSColor": {
+      "name": "TSColor",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "hsl": {
+            "$ref": "#/shapes/TSColorHsl/schema"
+          },
+          "hex": {
+            "type": "string"
+          },
+          "hsv": {
+            "$ref": "#/shapes/TSColorHsv/schema"
+          },
+          "rgb": {
+            "$ref": "#/shapes/TSColorRgb/schema"
+          }
+        }
+      },
+      "id": "TSColor",
+      "title": "Color"
+    },
+    "ProductEdge": {
+      "name": "ProductEdge",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string"
+          },
+          "node": {
+            "$ref": "#/shapes/Product/schema"
+          }
+        },
+        "required": [
+          "node",
+          "cursor"
+        ]
+      },
+      "id": "productEdge",
+      "title": "Product Edge"
+    },
+    "ProductCreatePayload": {
+      "name": "ProductCreatePayload",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "$ref": "#/shapes/Product/schema"
+          }
+        }
+      },
+      "id": "shopifyProductCreatePayload",
+      "title": "Product Create Payload"
+    },
+    "Tag": {
+      "name": "Tag",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "@source": {
+              "path": "nameId",
+              "service": "takeshape:local:self"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "model": {
+        "type": "taxonomy"
+      },
+      "id": "tagContentTypeId",
+      "title": "Tag"
     }
   },
-  "projectId": "38c138a5-acc4-4556-9b87-4c9749c3a499",
+  "projectId": "2dfe9bff-a0be-4309-ab53-acbe60bdb44b",
+  "updated": "2018-09-08T20:16:45.814Z",
   "forms": {
     "Post": {
       "default": {
