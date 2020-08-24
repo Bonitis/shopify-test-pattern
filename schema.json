@@ -16,7 +16,7 @@
   "queries": {
     "getProduct": {
       "resolver": "graphql:query",
-      "queryArgs": {
+      "args": {
         "type": "object",
         "properties": {
           "id": {
@@ -54,7 +54,7 @@
     },
     "listProducts": {
       "resolver": "graphql:query",
-      "queryArgs": {
+      "args": {
         "type": "object",
         "properties": {
           "after": {
@@ -123,7 +123,7 @@
     },
     "createProduct": {
       "resolver": "graphql:mutation",
-      "queryArgs": {
+      "args": {
         "type": "object",
         "properties": {
           "input": {
@@ -191,7 +191,7 @@
             "$ref": "#/shapes/Product/schema",
             "@resolver": {
               "resolver": "graphql:query",
-              "queryArgs": {
+              "args": {
                 "type": "object",
                 "properties": {
                   "id": {
