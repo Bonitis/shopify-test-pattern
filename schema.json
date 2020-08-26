@@ -42,17 +42,17 @@
       "resolver": "takeshape:get",
       "source": "takeshape:self:Tag"
     },
-    "listTag": {
+    "getTagList": {
       "type": "PaginatedList<Tag>",
       "resolver": "takeshape:list",
       "source": "takeshape:self:Tag"
     },
-    "listPost": {
+    "getPostList": {
       "type": "PaginatedList<Post>",
       "resolver": "takeshape:list",
       "source": "takeshape:self:Post"
     },
-    "listProducts": {
+    "getProductList": {
       "resolver": "graphql:query",
       "args": {
         "type": "object",
@@ -140,48 +140,6 @@
     }
   },
   "shapes": {
-    "TSColorRgb": {
-      "name": "TSColorRgb",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "a": {
-            "type": "number"
-          },
-          "b": {
-            "type": "number"
-          },
-          "r": {
-            "type": "number"
-          },
-          "g": {
-            "type": "number"
-          }
-        }
-      },
-      "id": "TSColorRgb",
-      "title": "Color Rgb"
-    },
-    "TSRelationship": {
-      "name": "TSRelationship",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "shapeId": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "shapeId",
-          "id"
-        ]
-      },
-      "id": "TSRelationship",
-      "title": "Relationship"
-    },
     "Post": {
       "name": "Post",
       "schema": {
@@ -371,28 +329,6 @@
       "id": "shopifyImage",
       "title": "Image"
     },
-    "TSColorHsv": {
-      "name": "TSColorHsv",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "h": {
-            "type": "number"
-          },
-          "a": {
-            "type": "number"
-          },
-          "s": {
-            "type": "number"
-          },
-          "v": {
-            "type": "number"
-          }
-        }
-      },
-      "id": "TSColorHsv",
-      "title": "Color Hsv"
-    },
     "ProductInput": {
       "name": "ProductInput",
       "schema": {
@@ -474,50 +410,6 @@
       },
       "id": "productConnection",
       "title": "Product Connection"
-    },
-    "TSColorHsl": {
-      "name": "TSColorHsl",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "h": {
-            "type": "number"
-          },
-          "a": {
-            "type": "number"
-          },
-          "s": {
-            "type": "number"
-          },
-          "l": {
-            "type": "number"
-          }
-        }
-      },
-      "id": "TSColorHsl",
-      "title": "Color Hsl"
-    },
-    "TSColor": {
-      "name": "TSColor",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "hsl": {
-            "$ref": "#/shapes/TSColorHsl/schema"
-          },
-          "hex": {
-            "type": "string"
-          },
-          "hsv": {
-            "$ref": "#/shapes/TSColorHsv/schema"
-          },
-          "rgb": {
-            "$ref": "#/shapes/TSColorRgb/schema"
-          }
-        }
-      },
-      "id": "TSColor",
-      "title": "Color"
     },
     "ProductEdge": {
       "name": "ProductEdge",
