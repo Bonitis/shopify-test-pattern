@@ -180,7 +180,11 @@
           },
           "productId": {
             "type": "string",
-            "@tag": "id"
+            "@tag": "id",
+            "@source": {
+              "path": "productId",
+              "service": "takeshape:local:self"
+            }
           },
           "title": {
             "type": "string",
@@ -226,225 +230,6 @@
       "id": "postContentTypeId",
       "title": "Post"
     },
-    "Product": {
-      "name": "Product",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "images": {
-            "type": "array",
-            "items": {
-              "$ref": "#/shapes/Image/schema"
-            }
-          },
-          "publishedAt": {
-            "type": "string",
-            "format": "date-time",
-            "@tag": "date"
-          },
-          "templateSuffix": {
-            "type": "string"
-          },
-          "availablePublicationCount": {
-            "type": "integer"
-          },
-          "description": {
-            "type": "string"
-          },
-          "handle": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string",
-            "@tag": "title"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "@tag": "date"
-          },
-          "featuredImage": {
-            "$ref": "#/shapes/Image/schema"
-          },
-          "vendor": {
-            "type": "string"
-          },
-          "descriptionHtml": {
-            "type": "string",
-            "@tag": "html"
-          },
-          "id": {
-            "type": "string",
-            "@tag": "id"
-          },
-          "seo": {
-            "type": "object",
-            "properties": {
-              "title": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              }
-            }
-          },
-          "productType": {
-            "type": "string"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "@tag": "date"
-          }
-        }
-      },
-      "id": "shopifyProduct",
-      "title": "Product"
-    },
-    "Image": {
-      "name": "Image",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "width": {
-            "type": "number"
-          },
-          "id": {
-            "type": "number"
-          },
-          "altText": {
-            "type": "string"
-          },
-          "src": {
-            "type": "string",
-            "@tag": "imageUrl"
-          }
-        }
-      },
-      "id": "shopifyImage",
-      "title": "Image"
-    },
-    "ProductInput": {
-      "name": "ProductInput",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "vendor": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "descriptionHtml": {
-            "type": "string",
-            "@tag": "html"
-          },
-          "handle": {
-            "type": "string"
-          },
-          "seo": {
-            "type": "object",
-            "properties": {
-              "title": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              }
-            }
-          },
-          "title": {
-            "type": "string",
-            "@tag": "title"
-          },
-          "productType": {
-            "type": "string"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "required": [
-          "title"
-        ]
-      },
-      "id": "productInput",
-      "title": "Product Input"
-    },
-    "ProductConnection": {
-      "name": "ProductConnection",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "edges": {
-            "type": "array",
-            "items": {
-              "$ref": "#/shapes/ProductEdge/schema"
-            }
-          },
-          "pageInfo": {
-            "type": "object",
-            "properties": {
-              "hasNextPage": {
-                "type": "boolean"
-              },
-              "hasPreviousPage": {
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "hasNextPage",
-              "hasPreviousPage"
-            ]
-          }
-        },
-        "required": []
-      },
-      "id": "productConnection",
-      "title": "Product Connection"
-    },
-    "ProductEdge": {
-      "name": "ProductEdge",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "cursor": {
-            "type": "string"
-          },
-          "node": {
-            "$ref": "#/shapes/Product/schema"
-          }
-        },
-        "required": [
-          "node",
-          "cursor"
-        ]
-      },
-      "id": "productEdge",
-      "title": "Product Edge"
-    },
-    "ProductCreatePayload": {
-      "name": "ProductCreatePayload",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "product": {
-            "$ref": "#/shapes/Product/schema"
-          }
-        }
-      },
-      "id": "shopifyProductCreatePayload",
-      "title": "Product Create Payload"
-    },
     "Tag": {
       "name": "Tag",
       "schema": {
@@ -467,6 +252,1452 @@
       },
       "id": "tagContentTypeId",
       "title": "Tag"
+    },
+    "Product": {
+      "name": "Product",
+      "title": "Product",
+      "id": "product",
+      "description": "Represents a product, including information about related collections and product variants.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "availablePublicationCount": {
+            "type": "integer",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "availablePublicationCount"
+            },
+            "description": "The number of publications a resource is published to without feedback errors."
+          },
+          "bodyHtml": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "bodyHtml"
+            },
+            "@deprecationReason": "Use `descriptionHtml` instead",
+            "description": "The description of the product, complete with HTML formatting."
+          },
+          "collections": {
+            "$ref": "#/shapes/CollectionConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "TITLE",
+                    "UPDATED_AT",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `collection_type`\n - `publishable_status`\n - `published_status`\n - `title`\n - `updated_at`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                }
+              }
+            },
+            "description": "A list of the collections that include the product."
+          },
+          "createdAt": {
+            "description": "The date and time ([ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601)) when the product was created.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "createdAt"
+            }
+          },
+          "defaultCursor": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "defaultCursor"
+            },
+            "description": "A default cursor for use in pagination."
+          },
+          "description": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "description"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "truncateAt": {
+                  "type": "integer",
+                  "description": "Truncates string after the given length."
+                }
+              }
+            },
+            "description": "A stripped description of the product, single line with HTML tags removed."
+          },
+          "descriptionHtml": {
+            "description": "The description of the product, complete with HTML formatting.",
+            "@tag": "HTML",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "descriptionHtml"
+            }
+          },
+          "descriptionPlainSummary": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "descriptionPlainSummary"
+            },
+            "@deprecationReason": "Use `description` instead",
+            "description": "Stripped description of the product, single line with HTML tags removed.\nTruncated to 60 characters."
+          },
+          "featuredImage": {
+            "$ref": "#/shapes/Image/schema",
+            "description": "The featured image for the product."
+          },
+          "featuredMedia": {
+            "$ref": "#/shapes/Media/schema",
+            "description": "The featured media for the product."
+          },
+          "feedback": {
+            "$ref": "#/shapes/ResourceFeedback/schema",
+            "description": "Information about the product that's provided through resource feedback."
+          },
+          "giftCardTemplateSuffix": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "giftCardTemplateSuffix"
+            },
+            "description": "The theme template used when viewing the gift card in a store."
+          },
+          "handle": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "handle"
+            },
+            "description": "A unique human-friendly string of the product's title."
+          },
+          "hasOnlyDefaultVariant": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "hasOnlyDefaultVariant"
+            },
+            "description": "Whether the product has only a single variant with the default option and value."
+          },
+          "hasOutOfStockVariants": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "hasOutOfStockVariants"
+            },
+            "description": "Whether the product has out of stock variants."
+          },
+          "id": {
+            "type": "string",
+            "@tag": "id",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "id"
+            },
+            "description": "Globally unique identifier."
+          },
+          "images": {
+            "$ref": "#/shapes/ImageConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "CREATED_AT",
+                    "POSITION",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "maxWidth": {
+                  "type": "integer",
+                  "description": "Image width in pixels between 1 and 2048. This argument is deprecated: Use `maxWidth` on `Image.transformedSrc` instead."
+                },
+                "maxHeight": {
+                  "type": "integer",
+                  "description": "Image height in pixels between 1 and 2048. This argument is deprecated: Use\n`maxHeight` on `Image.transformedSrc` instead."
+                },
+                "crop": {
+                  "description": "Crops the image according to the specified region. This argument is\ndeprecated: Use `crop` on `Image.transformedSrc` instead.",
+                  "enum": [
+                    "CENTER",
+                    "TOP",
+                    "BOTTOM",
+                    "LEFT",
+                    "RIGHT"
+                  ]
+                },
+                "scale": {
+                  "type": "integer",
+                  "description": "Image size multiplier for high-resolution retina displays. Must be between 1\nand 3. This argument is deprecated: Use `scale` on `Image.transformedSrc` instead."
+                }
+              }
+            },
+            "description": "The images associated with the product."
+          },
+          "inCollection": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "inCollection"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "@tag": "id",
+                  "description": "The ID of the collection to check."
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "description": "Whether the product is in a given collection."
+          },
+          "isGiftCard": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "isGiftCard"
+            },
+            "description": "Whether the product is a gift card."
+          },
+          "legacyResourceId": {
+            "description": "The ID of the corresponding resource in the REST Admin API.",
+            "@tag": "UnsignedInt64",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "legacyResourceId"
+            }
+          },
+          "media": {
+            "$ref": "#/shapes/MediaConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "POSITION",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                }
+              }
+            },
+            "description": "The media associated with the product."
+          },
+          "mediaCount": {
+            "type": "integer",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "mediaCount"
+            },
+            "description": "Total count of media belonging to a product."
+          },
+          "metafield": {
+            "$ref": "#/shapes/Metafield/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "Container for a set of metafields (maximum of 20 characters)."
+                },
+                "key": {
+                  "type": "string",
+                  "description": "Identifier for the metafield (maximum of 30 characters)."
+                }
+              },
+              "required": [
+                "namespace",
+                "key"
+              ]
+            },
+            "description": "The metafield associated with the resource."
+          },
+          "metafields": {
+            "$ref": "#/shapes/MetafieldConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "Finds all metafields with a specific namespace under the resource."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "A paginated list of metafields associated with the resource."
+          },
+          "onlineStorePreviewUrl": {
+            "description": "The online store preview URL.",
+            "@tag": "URL",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "onlineStorePreviewUrl"
+            }
+          },
+          "onlineStoreUrl": {
+            "description": "The online store URL for the product.\nA value of `null` indicates that the product is not published to the Online Store sales channel.",
+            "@tag": "URL",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "onlineStoreUrl"
+            }
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ProductOption/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "options"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Truncate the array result to this size."
+                }
+              }
+            },
+            "description": "A list of custom product options (maximum of 3 per product)."
+          },
+          "priceRange": {
+            "$ref": "#/shapes/ProductPriceRange/schema",
+            "@deprecationReason": "Deprecated in API version 2020-10. Use `priceRangeV2` instead.",
+            "description": "The price range of the product."
+          },
+          "privateMetafield": {
+            "$ref": "#/shapes/PrivateMetafield/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "The namespace for the private metafield."
+                },
+                "key": {
+                  "type": "string",
+                  "description": "The key for the private metafield."
+                }
+              },
+              "required": [
+                "namespace",
+                "key"
+              ]
+            },
+            "description": "Returns a private metafield found by namespace and key."
+          },
+          "privateMetafields": {
+            "$ref": "#/shapes/PrivateMetafieldConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "Filter the private metafields by namespace."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of private metafields."
+          },
+          "productPublications": {
+            "$ref": "#/shapes/ProductPublicationConnection/schema",
+            "@deprecationReason": "Use `resourcePublications` instead",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "A list of the channels where the product is published."
+          },
+          "productType": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "productType"
+            },
+            "description": "The product type specified by the merchant."
+          },
+          "publicationCount": {
+            "type": "integer",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publicationCount"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "onlyPublished": {
+                  "type": "boolean",
+                  "description": "Include only the resource's publications that are published. If false, then\nreturn all the resource's publications including future publications."
+                }
+              }
+            },
+            "description": "The number of publications a resource is published on."
+          },
+          "publications": {
+            "$ref": "#/shapes/ProductPublicationConnection/schema",
+            "@deprecationReason": "Use `resourcePublications` instead",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "onlyPublished": {
+                  "type": "boolean",
+                  "description": "Return only the publications that are published. If false, then return all publications."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "A list of the channels where the product is published."
+          },
+          "publishedAt": {
+            "description": "The date and time ([ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601))\nwhen the product was published to the Online Store.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishedAt"
+            }
+          },
+          "publishedOnChannel": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishedOnChannel"
+            },
+            "@deprecationReason": "Use `publishedOnPublication` instead",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "channelId": {
+                  "type": "string",
+                  "@tag": "id",
+                  "description": "The ID of the channel to check."
+                }
+              },
+              "required": [
+                "channelId"
+              ]
+            },
+            "description": "Check to see whether the resource is published to a given channel."
+          },
+          "publishedOnCurrentChannel": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishedOnCurrentChannel"
+            },
+            "@deprecationReason": "Use `publishedOnCurrentPublication` instead",
+            "description": "Check to see whether the resource is published to the calling app's channel."
+          },
+          "publishedOnCurrentPublication": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishedOnCurrentPublication"
+            },
+            "description": "Check to see whether the resource is published to the calling app's publication."
+          },
+          "publishedOnPublication": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishedOnPublication"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "publicationId": {
+                  "type": "string",
+                  "@tag": "id",
+                  "description": "The ID of the publication to check."
+                }
+              },
+              "required": [
+                "publicationId"
+              ]
+            },
+            "description": "Check to see whether the resource is published to a given publication."
+          },
+          "resourcePublications": {
+            "$ref": "#/shapes/ResourcePublicationConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "onlyPublished": {
+                  "type": "boolean",
+                  "description": "Whether to return only the resources that are currently published. If false,\nthen also returns the resources that are scheduled to be published."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The list of resources that are published to a publication."
+          },
+          "seo": {
+            "$ref": "#/shapes/SEO/schema",
+            "description": "SEO information of the product."
+          },
+          "storefrontId": {
+            "description": "The storefront ID of the product.",
+            "@tag": "StorefrontID",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "storefrontId"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "tags"
+            },
+            "description": "A comma separated list of tags that have been added to the product."
+          },
+          "templateSuffix": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "templateSuffix"
+            },
+            "description": "The theme template used when viewing the product in a store."
+          },
+          "title": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "title"
+            },
+            "description": "The title of the product."
+          },
+          "totalInventory": {
+            "type": "integer",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "totalInventory"
+            },
+            "description": "The quantity of inventory in stock."
+          },
+          "totalVariants": {
+            "type": "integer",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "totalVariants"
+            },
+            "description": "The number of variants that are associated with the product."
+          },
+          "tracksInventory": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "tracksInventory"
+            },
+            "description": "Whether inventory tracking has been enabled for the product."
+          },
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/PublishedTranslation/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "translations"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "locale": {
+                  "type": "string",
+                  "description": "Filters translations locale."
+                }
+              },
+              "required": [
+                "locale"
+              ]
+            },
+            "description": "The translations associated with the resource."
+          },
+          "unpublishedChannels": {
+            "$ref": "#/shapes/ChannelConnection/schema",
+            "@deprecationReason": "Use `unpublishedPublications` instead",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The list of channels that the resource is not published to."
+          },
+          "unpublishedPublications": {
+            "$ref": "#/shapes/PublicationConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The list of publications that the resource is not published to."
+          },
+          "updatedAt": {
+            "description": "The date and time ([ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601)) when the product was last modified.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "updatedAt"
+            }
+          },
+          "variants": {
+            "$ref": "#/shapes/ProductVariantConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "TITLE",
+                    "NAME",
+                    "SKU",
+                    "INVENTORY_QUANTITY",
+                    "INVENTORY_MANAGEMENT",
+                    "INVENTORY_LEVELS_AVAILABLE",
+                    "INVENTORY_POLICY",
+                    "FULL_TITLE",
+                    "POPULAR",
+                    "POSITION",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                }
+              }
+            },
+            "description": "A list of variants associated with the product."
+          },
+          "vendor": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "vendor"
+            },
+            "description": "The name of the product's vendor."
+          }
+        },
+        "required": [
+          "availablePublicationCount",
+          "collections",
+          "createdAt",
+          "defaultCursor",
+          "description",
+          "descriptionHtml",
+          "descriptionPlainSummary",
+          "handle",
+          "hasOnlyDefaultVariant",
+          "hasOutOfStockVariants",
+          "id",
+          "images",
+          "inCollection",
+          "isGiftCard",
+          "legacyResourceId",
+          "media",
+          "mediaCount",
+          "metafields",
+          "options",
+          "priceRange",
+          "privateMetafields",
+          "productPublications",
+          "productType",
+          "publicationCount",
+          "publications",
+          "publishedOnChannel",
+          "publishedOnCurrentChannel",
+          "publishedOnCurrentPublication",
+          "publishedOnPublication",
+          "resourcePublications",
+          "seo",
+          "storefrontId",
+          "tags",
+          "title",
+          "totalInventory",
+          "totalVariants",
+          "tracksInventory",
+          "translations",
+          "unpublishedChannels",
+          "unpublishedPublications",
+          "updatedAt",
+          "variants",
+          "vendor"
+        ]
+      }
+    },
+    "ProductConnection": {
+      "name": "ProductConnection",
+      "title": "ProductConnection",
+      "id": "productConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ProductEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "ProductCreatePayload": {
+      "name": "ProductCreatePayload",
+      "title": "ProductCreatePayload",
+      "id": "productCreatePayload",
+      "description": "Return type for `productCreate` mutation.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "$ref": "#/shapes/Product/schema",
+            "description": "The product object."
+          },
+          "shop": {
+            "$ref": "#/shapes/Shop/schema",
+            "description": "The shop associated with the product."
+          },
+          "userErrors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/UserError/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "userErrors"
+            },
+            "description": "List of errors that occurred executing the mutation."
+          }
+        },
+        "required": [
+          "shop",
+          "userErrors"
+        ]
+      }
+    },
+    "ProductEdge": {
+      "name": "ProductEdge",
+      "title": "ProductEdge",
+      "id": "productEdge",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "cursor"
+            },
+            "description": "A cursor for use in pagination."
+          },
+          "node": {
+            "$ref": "#/shapes/Product/schema",
+            "description": "The item at the end of ProductEdge."
+          }
+        },
+        "required": [
+          "cursor",
+          "node"
+        ]
+      }
+    },
+    "ProductInput": {
+      "name": "ProductInput",
+      "title": "ProductInput",
+      "id": "productInput",
+      "description": "Specifies the input fields required to create a product.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "descriptionHtml": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "descriptionHtml"
+            },
+            "description": "The description of the product, complete with HTML formatting."
+          },
+          "handle": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "handle"
+            },
+            "description": "A unique human-friendly string for the product. Automatically generated from the product's title."
+          },
+          "redirectNewHandle": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "redirectNewHandle"
+            },
+            "description": "Whether a redirect is required after a new handle has been provided.\nIf true, then the old handle is redirected to the new one automatically."
+          },
+          "seo": {
+            "$ref": "#/shapes/SEOInput/schema",
+            "description": "The SEO information associated with the product."
+          },
+          "productType": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "productType"
+            },
+            "description": "The product type specified by the merchant."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "tags"
+            },
+            "description": "A comma separated list tags that have been added to the product."
+          },
+          "templateSuffix": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "templateSuffix"
+            },
+            "description": "The theme template used when viewing the product in a store."
+          },
+          "giftCard": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "giftCard"
+            },
+            "description": "Whether the product is a gift card."
+          },
+          "giftCardTemplateSuffix": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "giftCardTemplateSuffix"
+            },
+            "description": "The theme template used when viewing the gift card in a store."
+          },
+          "title": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "title"
+            },
+            "description": "The title of the product."
+          },
+          "vendor": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "vendor"
+            },
+            "description": "The name of the product's vendor."
+          },
+          "bodyHtml": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "bodyHtml"
+            },
+            "description": "A description of the product. Supports HTML formatting. This argument is deprecated: Use `descriptionHtml` instead."
+          },
+          "collectionsToJoin": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "@tag": "id"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "collectionsToJoin"
+            },
+            "description": "The IDs of the collections that this product will be added to."
+          },
+          "collectionsToLeave": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "@tag": "id"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "collectionsToLeave"
+            },
+            "description": "The IDs of collections that will no longer include the product."
+          },
+          "id": {
+            "type": "string",
+            "@tag": "id",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "id"
+            },
+            "description": "Specifies the product to update in productUpdate or creates a new product if absent in productCreate."
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ImageInput/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "images"
+            },
+            "description": "The images to associate with the product."
+          },
+          "metafields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/MetafieldInput/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "metafields"
+            },
+            "description": "The metafields to associate with this product."
+          },
+          "privateMetafields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/PrivateMetafieldInput/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "privateMetafields"
+            },
+            "description": "The private metafields to associated with this product."
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "options"
+            },
+            "description": "List of custom product options (maximum of 3 per product)."
+          },
+          "productPublications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ProductPublicationInput/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "productPublications"
+            },
+            "description": "A list of the channels where the product is published. This argument is deprecated: Use `PublishablePublish` instead."
+          },
+          "publications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ProductPublicationInput/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publications"
+            },
+            "description": "A list of the channels where the product is published. This argument is deprecated: Use `PublishablePublish` instead."
+          },
+          "publishDate": {
+            "description": "This argument is deprecated: Use `PublishablePublish` instead.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishDate"
+            }
+          },
+          "publishOn": {
+            "description": "This argument is deprecated: Use `PublishablePublish` instead.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishOn"
+            }
+          },
+          "published": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "published"
+            },
+            "description": "This argument is deprecated: Use `PublishablePublish` instead."
+          },
+          "publishedAt": {
+            "description": "This argument is deprecated: Use `PublishablePublish` instead.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishedAt"
+            }
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ProductVariantInput/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "variants"
+            },
+            "description": "A list of variants associated with the product."
+          }
+        }
+      }
+    },
+    "Image": {
+      "name": "Image",
+      "title": "Image",
+      "id": "image",
+      "description": "Represents an image resource.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "altText": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "altText"
+            },
+            "description": "A word or phrase to share the nature or contents of an image."
+          },
+          "id": {
+            "type": "string",
+            "@tag": "id",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "id"
+            },
+            "description": "A unique identifier for the image."
+          },
+          "metafield": {
+            "$ref": "#/shapes/Metafield/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "Container for a set of metafields (maximum of 20 characters)."
+                },
+                "key": {
+                  "type": "string",
+                  "description": "Identifier for the metafield (maximum of 30 characters)."
+                }
+              },
+              "required": [
+                "namespace",
+                "key"
+              ]
+            },
+            "description": "The metafield associated with the resource."
+          },
+          "metafields": {
+            "$ref": "#/shapes/MetafieldConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "Finds all metafields with a specific namespace under the resource."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "A paginated list of metafields associated with the resource."
+          },
+          "originalSrc": {
+            "description": "The location of the original image as a URL.\n\nIf there are any existing transformations in the original source URL, they will remain and not be stripped.",
+            "@tag": "URL",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "originalSrc"
+            }
+          },
+          "privateMetafield": {
+            "$ref": "#/shapes/PrivateMetafield/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "The namespace for the private metafield."
+                },
+                "key": {
+                  "type": "string",
+                  "description": "The key for the private metafield."
+                }
+              },
+              "required": [
+                "namespace",
+                "key"
+              ]
+            },
+            "description": "Returns a private metafield found by namespace and key."
+          },
+          "privateMetafields": {
+            "$ref": "#/shapes/PrivateMetafieldConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "Filter the private metafields by namespace."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of private metafields."
+          },
+          "src": {
+            "description": "The location of the image as a URL.",
+            "@tag": "URL",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "src"
+            },
+            "@deprecationReason": "Previously an image had a single `src` field. This could either return the original image\nlocation or a URL that contained transformations such as sizing or scale.\n\nThese transformations were specified by arguments on the parent field.\n\nNow an image has two distinct URL fields: `originalSrc` and `transformedSrc`.\n\n* `originalSrc` - the original unmodified image URL\n* `transformedSrc` - the image URL with the specified transformations included\n\nTo migrate to the new fields, image transformations should be moved from the parent field to `transformedSrc`.\n\nBefore:\n```graphql\n{\n  shop {\n    productImages(maxWidth: 200, scale: 2) {\n      edges {\n        node {\n          src\n        }\n      }\n    }\n  }\n}\n```\n\nAfter:\n```graphql\n{\n  shop {\n    productImages {\n      edges {\n        node {\n          transformedSrc(maxWidth: 200, scale: 2)\n        }\n      }\n    }\n  }\n}\n```\n"
+          },
+          "transformedSrc": {
+            "description": "The location of the transformed image as a URL.\n\nAll transformation arguments are considered \"best-effort\". If they can be applied to an image, they will be.\nOtherwise any transformations which an image type does not support will be ignored.",
+            "@tag": "URL",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "transformedSrc"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "maxWidth": {
+                  "type": "integer",
+                  "description": "Image width in pixels between 1 and 5760."
+                },
+                "maxHeight": {
+                  "type": "integer",
+                  "description": "Image height in pixels between 1 and 5760."
+                },
+                "crop": {
+                  "description": "Crops the image according to the specified region.",
+                  "enum": [
+                    "CENTER",
+                    "TOP",
+                    "BOTTOM",
+                    "LEFT",
+                    "RIGHT"
+                  ]
+                },
+                "scale": {
+                  "type": "integer",
+                  "description": "Image size multiplier for high-resolution retina displays. Must be between 1 and 3."
+                },
+                "preferredContentType": {
+                  "description": "Best effort conversion of image into content type (SVG -> PNG, Anything -> JGP, Anything -> WEBP are supported).",
+                  "enum": [
+                    "PNG",
+                    "JPG",
+                    "WEBP"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "metafields",
+          "originalSrc",
+          "privateMetafields",
+          "src",
+          "transformedSrc"
+        ]
+      }
     }
   },
   "projectId": "2dfe9bff-a0be-4309-ab53-acbe60bdb44b",
