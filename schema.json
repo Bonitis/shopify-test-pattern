@@ -2222,10 +2222,6 @@
               "service": "shopify:seans-store-takeshape",
               "path": "publishDate"
             }
-          },
-          "publishable": {
-            "$ref": "#/shapes/Publishable/schema",
-            "description": "The resource published to the publication."
           }
         },
         "required": [
@@ -2300,10 +2296,6 @@
       "schema": {
         "type": "object",
         "properties": {
-          "app": {
-            "$ref": "#/shapes/App/schema",
-            "description": "The app associated with the publication."
-          },
           "collectionPublicationsV3": {
             "$ref": "#/shapes/ResourcePublicationConnection/schema",
             "@args": {
@@ -2570,10 +2562,6 @@
       "schema": {
         "type": "object",
         "properties": {
-          "app": {
-            "$ref": "#/shapes/App/schema",
-            "description": "Underlying app used by the channel."
-          },
           "collectionPublicationsV3": {
             "$ref": "#/shapes/ResourcePublicationConnection/schema",
             "@args": {
@@ -2924,6 +2912,190 @@
             "description": "SEO description of the product."
           }
         }
+      }
+    },
+    "MoneyV2": {
+      "name": "MoneyV2",
+      "title": "MoneyV2",
+      "id": "moneyV2",
+      "description": "A monetary value with currency.\n\nTo format currencies, combine this type's amount and currencyCode fields with your client's locale.\n\nFor example, in JavaScript you could use Intl.NumberFormat:\n\n```js\nnew Intl.NumberFormat(locale, {\n  style: 'currency',\n  currency: currencyCode\n}).format(amount);\n```\n\nOther formatting libraries include:\n\n* iOS - [NumberFormatter](https://developer.apple.com/documentation/foundation/numberformatter)\n* Android - [NumberFormat](https://developer.android.com/reference/java/text/NumberFormat.html)\n* PHP - [NumberFormatter](http://php.net/manual/en/class.numberformatter.php)\n\nFor a more general solution, the [Unicode CLDR number formatting database] is available with many implementations\n(such as [TwitterCldr](https://github.com/twitter/twitter-cldr-rb)).",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "description": "Decimal money amount.",
+            "@tag": "Decimal",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "amount"
+            }
+          },
+          "currencyCode": {
+            "description": "Currency of the money.",
+            "enum": [
+              "USD",
+              "EUR",
+              "GBP",
+              "CAD",
+              "AFN",
+              "ALL",
+              "DZD",
+              "AOA",
+              "ARS",
+              "AMD",
+              "AWG",
+              "AUD",
+              "BBD",
+              "AZN",
+              "BDT",
+              "BSD",
+              "BHD",
+              "BIF",
+              "BYR",
+              "BZD",
+              "BMD",
+              "BTN",
+              "BAM",
+              "BRL",
+              "BOB",
+              "BWP",
+              "BND",
+              "BGN",
+              "MMK",
+              "KHR",
+              "CVE",
+              "KYD",
+              "XAF",
+              "CLP",
+              "CNY",
+              "COP",
+              "KMF",
+              "CDF",
+              "CRC",
+              "HRK",
+              "CZK",
+              "DKK",
+              "DJF",
+              "DOP",
+              "XCD",
+              "EGP",
+              "ETB",
+              "FKP",
+              "XPF",
+              "FJD",
+              "GIP",
+              "GMD",
+              "GHS",
+              "GTQ",
+              "GYD",
+              "GEL",
+              "GNF",
+              "HTG",
+              "HNL",
+              "HKD",
+              "HUF",
+              "ISK",
+              "INR",
+              "IDR",
+              "ILS",
+              "IRR",
+              "IQD",
+              "JMD",
+              "JPY",
+              "JEP",
+              "JOD",
+              "KZT",
+              "KES",
+              "KWD",
+              "KGS",
+              "LAK",
+              "LVL",
+              "LBP",
+              "LSL",
+              "LRD",
+              "LYD",
+              "LTL",
+              "MGA",
+              "MKD",
+              "MOP",
+              "MWK",
+              "MVR",
+              "MXN",
+              "MYR",
+              "MUR",
+              "MDL",
+              "MAD",
+              "MNT",
+              "MZN",
+              "NAD",
+              "NPR",
+              "ANG",
+              "NZD",
+              "NIO",
+              "NGN",
+              "NOK",
+              "OMR",
+              "PAB",
+              "PKR",
+              "PGK",
+              "PYG",
+              "PEN",
+              "PHP",
+              "PLN",
+              "QAR",
+              "RON",
+              "RUB",
+              "RWF",
+              "WST",
+              "SHP",
+              "SAR",
+              "STD",
+              "RSD",
+              "SCR",
+              "SLL",
+              "SGD",
+              "SDG",
+              "SYP",
+              "ZAR",
+              "KRW",
+              "SSP",
+              "SBD",
+              "LKR",
+              "SRD",
+              "SZL",
+              "SEK",
+              "CHF",
+              "TWD",
+              "THB",
+              "TJS",
+              "TZS",
+              "TOP",
+              "TTD",
+              "TND",
+              "TRY",
+              "TMT",
+              "UGX",
+              "UAH",
+              "AED",
+              "UYU",
+              "UZS",
+              "VUV",
+              "VEF",
+              "VND",
+              "XOF",
+              "YER",
+              "ZMW"
+            ],
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "currencyCode"
+            }
+          }
+        },
+        "required": [
+          "amount",
+          "currencyCode"
+        ]
       }
     }
   },
