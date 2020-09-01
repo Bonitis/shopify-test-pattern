@@ -1053,52 +1053,6 @@
               "path": "updatedAt"
             }
           },
-          "variants": {
-            "$ref": "#/shapes/ProductVariantConnection/schema",
-            "@args": {
-              "type": "object",
-              "properties": {
-                "first": {
-                  "type": "integer",
-                  "description": "Returns up to the first `n` elements from the list."
-                },
-                "after": {
-                  "type": "string",
-                  "description": "Returns the elements that come after the specified cursor."
-                },
-                "last": {
-                  "type": "integer",
-                  "description": "Returns up to the last `n` elements from the list."
-                },
-                "before": {
-                  "type": "string",
-                  "description": "Returns the elements that come before the specified cursor."
-                },
-                "reverse": {
-                  "type": "boolean",
-                  "description": "Reverse the order of the underlying list."
-                },
-                "sortKey": {
-                  "description": "Sort the underlying list by the given key.",
-                  "enum": [
-                    "TITLE",
-                    "NAME",
-                    "SKU",
-                    "INVENTORY_QUANTITY",
-                    "INVENTORY_MANAGEMENT",
-                    "INVENTORY_LEVELS_AVAILABLE",
-                    "INVENTORY_POLICY",
-                    "FULL_TITLE",
-                    "POPULAR",
-                    "POSITION",
-                    "ID",
-                    "RELEVANCE"
-                  ]
-                }
-              }
-            },
-            "description": "A list of variants associated with the product."
-          },
           "vendor": {
             "type": "string",
             "@source": {
