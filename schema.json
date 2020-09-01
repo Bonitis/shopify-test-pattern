@@ -325,7 +325,8 @@
           },
           "createdAt": {
             "description": "The date and time ([ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601)) when the product was created.",
-            "@tag": "DateTime",
+            "type": "string",
+            "format": "date-time",
             "@source": {
               "service": "shopify:seans-store-takeshape",
               "path": "createdAt"
@@ -373,8 +374,9 @@
             }
           },
           "updatedAt": {
+            "type": "string",
+            "format": "date-time",
             "description": "The date and time ([ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601)) when the product was last modified.",
-            "@tag": "DateTime",
             "@source": {
               "service": "shopify:seans-store-takeshape",
               "path": "updatedAt"
