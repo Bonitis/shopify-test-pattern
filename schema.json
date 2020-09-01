@@ -374,10 +374,6 @@
             "$ref": "#/shapes/Image/schema",
             "description": "The featured image for the product."
           },
-          "featuredMedia": {
-            "$ref": "#/shapes/Media/schema",
-            "description": "The featured media for the product."
-          },
           "feedback": {
             "$ref": "#/shapes/ResourceFeedback/schema",
             "description": "Information about the product that's provided through resource feedback."
@@ -1697,6 +1693,3598 @@
           "src",
           "transformedSrc"
         ]
+      }
+    },
+    "CollectionConnection": {
+      "name": "CollectionConnection",
+      "title": "CollectionConnection",
+      "id": "collectionConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/CollectionEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "ResourceFeedback": {
+      "name": "ResourceFeedback",
+      "title": "ResourceFeedback",
+      "id": "resourceFeedback",
+      "description": "Represents feedback from apps about a resource, and the steps required to set up the apps on the shop.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "appFeedback": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/AppFeedback/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "appFeedback"
+            },
+            "@deprecationReason": "Use `details` instead",
+            "description": "Feedback from an app about the steps a merchant needs to take to set up the app on their store."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/AppFeedback/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "details"
+            },
+            "description": "List of AppFeedback detailing issues regarding a resource."
+          },
+          "summary": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "summary"
+            },
+            "description": "Summary of resource feedback pertaining to the resource."
+          }
+        },
+        "required": [
+          "appFeedback",
+          "details",
+          "summary"
+        ]
+      }
+    },
+    "ImageConnection": {
+      "name": "ImageConnection",
+      "title": "ImageConnection",
+      "id": "imageConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ImageEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "MediaConnection": {
+      "name": "MediaConnection",
+      "title": "MediaConnection",
+      "id": "mediaConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/MediaEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "Metafield": {
+      "name": "Metafield",
+      "title": "Metafield",
+      "id": "metafield",
+      "description": "Metafields represent custom metadata attached to a resource. Metafields can be sorted into namespaces and are\ncomposed of keys, values, and value types.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "description": "The date and time when the metafield was created.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "createdAt"
+            }
+          },
+          "description": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "description"
+            },
+            "description": "The description of a metafield."
+          },
+          "id": {
+            "type": "string",
+            "@tag": "id",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "id"
+            },
+            "description": "Globally unique identifier."
+          },
+          "key": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "key"
+            },
+            "description": "The key name for a metafield."
+          },
+          "legacyResourceId": {
+            "description": "The ID of the corresponding resource in the REST Admin API.",
+            "@tag": "UnsignedInt64",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "legacyResourceId"
+            }
+          },
+          "namespace": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "namespace"
+            },
+            "description": "The namespace for a metafield."
+          },
+          "ownerType": {
+            "description": "Owner type of a metafield visible to the Storefront API.",
+            "enum": [
+              "ARTICLE",
+              "BLOG",
+              "COLLECTION",
+              "CUSTOMER",
+              "DRAFTORDER",
+              "ORDER",
+              "PAGE",
+              "PRODUCT",
+              "PRODUCTIMAGE",
+              "PRODUCTVARIANT",
+              "SHOP"
+            ],
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "ownerType"
+            }
+          },
+          "updatedAt": {
+            "description": "The date and time when the metafield was updated.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "updatedAt"
+            }
+          },
+          "value": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "value"
+            },
+            "description": "The value of a metafield."
+          },
+          "valueType": {
+            "description": "Represents the metafield value type.",
+            "enum": [
+              "STRING",
+              "INTEGER",
+              "JSON_STRING"
+            ],
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "valueType"
+            }
+          }
+        },
+        "required": [
+          "createdAt",
+          "id",
+          "key",
+          "legacyResourceId",
+          "namespace",
+          "ownerType",
+          "updatedAt",
+          "value",
+          "valueType"
+        ]
+      }
+    },
+    "MetafieldConnection": {
+      "name": "MetafieldConnection",
+      "title": "MetafieldConnection",
+      "id": "metafieldConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/MetafieldEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "ProductPriceRange": {
+      "name": "ProductPriceRange",
+      "title": "ProductPriceRange",
+      "id": "productPriceRange",
+      "description": "The price range of the product.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "maxVariantPrice": {
+            "$ref": "#/shapes/MoneyV2/schema",
+            "description": "The highest variant's price."
+          },
+          "minVariantPrice": {
+            "$ref": "#/shapes/MoneyV2/schema",
+            "description": "The lowest variant's price."
+          }
+        },
+        "required": [
+          "maxVariantPrice",
+          "minVariantPrice"
+        ]
+      }
+    },
+    "PrivateMetafield": {
+      "name": "PrivateMetafield",
+      "title": "PrivateMetafield",
+      "id": "privateMetafield",
+      "description": "Private metafields represent custom metadata that is attached to a resource.\nPrivate metafields are private to the application that creates them on a shop's resources.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "description": "The date and time when the private metafield was created.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "createdAt"
+            }
+          },
+          "id": {
+            "type": "string",
+            "@tag": "id",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "id"
+            },
+            "description": "The id of the private metafield."
+          },
+          "key": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "key"
+            },
+            "description": "The key name for a private metafield."
+          },
+          "namespace": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "namespace"
+            },
+            "description": "The namespace for a private metafield."
+          },
+          "updatedAt": {
+            "description": "The date and time when the private metafield was updated.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "updatedAt"
+            }
+          },
+          "value": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "value"
+            },
+            "description": "The value of a private metafield."
+          },
+          "valueType": {
+            "description": "Represents the private metafield value type.",
+            "enum": [
+              "STRING",
+              "INTEGER",
+              "JSON_STRING"
+            ],
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "valueType"
+            }
+          }
+        },
+        "required": [
+          "createdAt",
+          "id",
+          "key",
+          "namespace",
+          "updatedAt",
+          "value",
+          "valueType"
+        ]
+      }
+    },
+    "PrivateMetafieldConnection": {
+      "name": "PrivateMetafieldConnection",
+      "title": "PrivateMetafieldConnection",
+      "id": "privateMetafieldConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/PrivateMetafieldEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "ProductPublication": {
+      "name": "ProductPublication",
+      "title": "ProductPublication",
+      "id": "productPublication",
+      "description": "Represents the channels where a product is published.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "$ref": "#/shapes/Channel/schema",
+            "description": "The channel where the product was or is published."
+          },
+          "isPublished": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "isPublished"
+            },
+            "description": "Whether the publication is published or not."
+          },
+          "product": {
+            "$ref": "#/shapes/Product/schema",
+            "description": "The product that was or is going to be published on the channel."
+          },
+          "publishDate": {
+            "description": "The date that the product was or is going to be published on the channel.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishDate"
+            }
+          }
+        },
+        "required": [
+          "channel",
+          "isPublished",
+          "product"
+        ]
+      }
+    },
+    "ProductPublicationConnection": {
+      "name": "ProductPublicationConnection",
+      "title": "ProductPublicationConnection",
+      "id": "productPublicationConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ProductPublicationEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "ProductPublicationEdge": {
+      "name": "ProductPublicationEdge",
+      "title": "ProductPublicationEdge",
+      "id": "productPublicationEdge",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "cursor"
+            },
+            "description": "A cursor for use in pagination."
+          },
+          "node": {
+            "$ref": "#/shapes/ProductPublication/schema",
+            "description": "The item at the end of ProductPublicationEdge."
+          }
+        },
+        "required": [
+          "cursor",
+          "node"
+        ]
+      }
+    },
+    "ResourcePublication": {
+      "name": "ResourcePublication",
+      "title": "ResourcePublication",
+      "id": "resourcePublication",
+      "description": "A resource publication represents that a resource has been published to a publication.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "$ref": "#/shapes/Channel/schema",
+            "@deprecationReason": "Use `publication` instead",
+            "description": "The channel the resource publication is published to."
+          },
+          "isPublished": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "isPublished"
+            },
+            "description": "Whether the resource publication is published. Also returns true if the resource publication is scheduled to be published.\nIf false, then the resource publication is neither published nor scheduled to be published."
+          },
+          "publication": {
+            "$ref": "#/shapes/Publication/schema",
+            "description": "The publication the resource publication is published to."
+          },
+          "publishDate": {
+            "description": "The date that the resource publication was or is going to be published to the publication.",
+            "@tag": "DateTime",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publishDate"
+            }
+          },
+          "publishable": {
+            "$ref": "#/shapes/Publishable/schema",
+            "description": "The resource published to the publication."
+          }
+        },
+        "required": [
+          "channel",
+          "isPublished",
+          "publication",
+          "publishDate",
+          "publishable"
+        ]
+      }
+    },
+    "ResourcePublicationConnection": {
+      "name": "ResourcePublicationConnection",
+      "title": "ResourcePublicationConnection",
+      "id": "resourcePublicationConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ResourcePublicationEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "ResourcePublicationEdge": {
+      "name": "ResourcePublicationEdge",
+      "title": "ResourcePublicationEdge",
+      "id": "resourcePublicationEdge",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "cursor"
+            },
+            "description": "A cursor for use in pagination."
+          },
+          "node": {
+            "$ref": "#/shapes/ResourcePublication/schema",
+            "description": "The item at the end of ResourcePublicationEdge."
+          }
+        },
+        "required": [
+          "cursor",
+          "node"
+        ]
+      }
+    },
+    "Publication": {
+      "name": "Publication",
+      "title": "Publication",
+      "id": "publication",
+      "description": "A publication is a group of products and collections that is published to an\napp. A publication can be a platform or marketplace such\nas Facebook or Pinterest, an online store, or POS.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "app": {
+            "$ref": "#/shapes/App/schema",
+            "description": "The app associated with the publication."
+          },
+          "collectionPublicationsV3": {
+            "$ref": "#/shapes/ResourcePublicationConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The collection publications for the list of collections published to the publication."
+          },
+          "collections": {
+            "$ref": "#/shapes/CollectionConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The list of collections published to the publication."
+          },
+          "hasCollection": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "hasCollection"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "@tag": "id",
+                  "description": "Collection ID to check."
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "description": "Whether the collection is available to the publication."
+          },
+          "id": {
+            "type": "string",
+            "@tag": "id",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "id"
+            },
+            "description": "Globally unique identifier."
+          },
+          "name": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "name"
+            },
+            "description": "Name of the publication."
+          },
+          "productPublicationsV3": {
+            "$ref": "#/shapes/ResourcePublicationConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The product publications for the list of products published to the publication."
+          },
+          "products": {
+            "$ref": "#/shapes/ProductConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The list of products published to the publication."
+          },
+          "supportsFuturePublishing": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "supportsFuturePublishing"
+            },
+            "description": "Whether or not this publication supports future publishing."
+          }
+        },
+        "required": [
+          "app",
+          "collectionPublicationsV3",
+          "collections",
+          "hasCollection",
+          "id",
+          "name",
+          "productPublicationsV3",
+          "products",
+          "supportsFuturePublishing"
+        ]
+      }
+    },
+    "PublicationConnection": {
+      "name": "PublicationConnection",
+      "title": "PublicationConnection",
+      "id": "publicationConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/PublicationEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "PublicationEdge": {
+      "name": "PublicationEdge",
+      "title": "PublicationEdge",
+      "id": "publicationEdge",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "cursor"
+            },
+            "description": "A cursor for use in pagination."
+          },
+          "node": {
+            "$ref": "#/shapes/Publication/schema",
+            "description": "The item at the end of PublicationEdge."
+          }
+        },
+        "required": [
+          "cursor",
+          "node"
+        ]
+      }
+    },
+    "SEO": {
+      "name": "SEO",
+      "title": "SEO",
+      "id": "seo",
+      "description": "SEO information.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "description"
+            },
+            "description": "SEO Description."
+          },
+          "title": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "title"
+            },
+            "description": "SEO Title."
+          }
+        }
+      }
+    },
+    "Channel": {
+      "name": "Channel",
+      "title": "Channel",
+      "id": "channel",
+      "description": "A channel is a group of products and collections that is published to an app. A\nchannel can be a platform or marketplace such\nas Facebook or Pinterest, an online store, or POS.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "app": {
+            "$ref": "#/shapes/App/schema",
+            "description": "Underlying app used by the channel."
+          },
+          "collectionPublicationsV3": {
+            "$ref": "#/shapes/ResourcePublicationConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The collection publications for the list of collections published to the channel."
+          },
+          "collections": {
+            "$ref": "#/shapes/CollectionConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The list of collections published to the channel."
+          },
+          "handle": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "handle"
+            },
+            "@deprecationReason": "Use `id` instead",
+            "description": "Unique identifier for the channel."
+          },
+          "hasCollection": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "hasCollection"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "@tag": "id",
+                  "description": "Collection ID to check."
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "description": "Whether the collection is available to the channel."
+          },
+          "id": {
+            "type": "string",
+            "@tag": "id",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "id"
+            },
+            "description": "Globally unique identifier."
+          },
+          "name": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "name"
+            },
+            "description": "Name of the channel."
+          },
+          "navigationItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/NavigationItem/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "navigationItems"
+            },
+            "@deprecationReason": "Use App.navigationItems instead",
+            "description": "Menu items for the channel, which also appear as submenu items in left navigation sidebar in the Shopify admin."
+          },
+          "overviewPath": {
+            "description": "Home page for the channel.",
+            "@tag": "URL",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "overviewPath"
+            },
+            "@deprecationReason": "Use App.launchUrl instead"
+          },
+          "productPublications": {
+            "$ref": "#/shapes/ProductPublicationConnection/schema",
+            "@deprecationReason": "Use `productPublicationsV3` instead",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The product publications for the products published to the channel."
+          },
+          "productPublicationsV3": {
+            "$ref": "#/shapes/ResourcePublicationConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The product publications for the list of products published to the channel."
+          },
+          "products": {
+            "$ref": "#/shapes/ProductConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The list of products published to the channel."
+          },
+          "supportsFuturePublishing": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "supportsFuturePublishing"
+            },
+            "description": "Whether or not this channel supports future publishing."
+          }
+        },
+        "required": [
+          "app",
+          "collectionPublicationsV3",
+          "collections",
+          "handle",
+          "hasCollection",
+          "id",
+          "name",
+          "navigationItems",
+          "productPublications",
+          "productPublicationsV3",
+          "products",
+          "supportsFuturePublishing"
+        ]
+      }
+    },
+    "ChannelConnection": {
+      "name": "ChannelConnection",
+      "title": "ChannelConnection",
+      "id": "channelConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ChannelEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "ChannelEdge": {
+      "name": "ChannelEdge",
+      "title": "ChannelEdge",
+      "id": "channelEdge",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "cursor"
+            },
+            "description": "A cursor for use in pagination."
+          },
+          "node": {
+            "$ref": "#/shapes/Channel/schema",
+            "description": "The item at the end of ChannelEdge."
+          }
+        },
+        "required": [
+          "cursor",
+          "node"
+        ]
+      }
+    },
+    "PageInfo": {
+      "name": "PageInfo",
+      "title": "PageInfo",
+      "id": "pageInfo",
+      "description": "Information about pagination in a connection.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "hasNextPage": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "hasNextPage"
+            },
+            "description": "Indicates if there are more pages to fetch."
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "hasPreviousPage"
+            },
+            "description": "Indicates if there are any pages prior to the current page."
+          }
+        },
+        "required": [
+          "hasNextPage",
+          "hasPreviousPage"
+        ]
+      }
+    },
+    "FulfillmentOrderConnection": {
+      "name": "FulfillmentOrderConnection",
+      "title": "FulfillmentOrderConnection",
+      "id": "fulfillmentOrderConnection",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/FulfillmentOrderEdge/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "edges"
+            },
+            "description": "A list of edges."
+          },
+          "pageInfo": {
+            "$ref": "#/shapes/PageInfo/schema",
+            "description": "Information to aid in pagination."
+          }
+        },
+        "required": [
+          "edges",
+          "pageInfo"
+        ]
+      }
+    },
+    "Shop": {
+      "name": "Shop",
+      "title": "Shop",
+      "id": "shop",
+      "description": "Represents the shop object.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "alerts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/ShopAlert/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "alerts"
+            },
+            "description": "Alert message that appears in the Shopify admin."
+          },
+          "analyticsToken": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "analyticsToken"
+            },
+            "description": "The token required to query the shop's reports or dashboards."
+          },
+          "assignedFulfillmentOrders": {
+            "$ref": "#/shapes/FulfillmentOrderConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "assignmentStatus": {
+                  "description": "The assigment status of the fulfillment orders that should be returned.",
+                  "enum": [
+                    "CANCELLATION_REQUESTED",
+                    "FULFILLMENT_REQUESTED",
+                    "FULFILLMENT_ACCEPTED"
+                  ]
+                },
+                "locationIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "@tag": "id"
+                  },
+                  "description": "Returns fulfillment orders only for certain locations, specified by a list of location IDs."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                }
+              }
+            },
+            "description": "Paginated list of fulfillment orders assigned to fulfillment services."
+          },
+          "availableChannelApps": {
+            "$ref": "#/shapes/AppConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of sales channels not currently installed on the shop."
+          },
+          "billingAddress": {
+            "$ref": "#/shapes/MailingAddress/schema",
+            "description": "The shop's billing address information."
+          },
+          "channelCount": {
+            "type": "integer",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "channelCount"
+            },
+            "@deprecationReason": "Use `publicationCount` instead",
+            "description": "Exposes the number of channels."
+          },
+          "channels": {
+            "$ref": "#/shapes/ChannelConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.channels` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of the shop's active sales channels."
+          },
+          "checkoutApiSupported": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "checkoutApiSupported"
+            },
+            "description": "Specifies whether the shop supports checkouts via Checkout API."
+          },
+          "collectionByHandle": {
+            "$ref": "#/shapes/Collection/schema",
+            "@deprecationReason": "Use `QueryRoot.collectionByHandle` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "handle": {
+                  "type": "string",
+                  "description": "The handle of the collection."
+                }
+              },
+              "required": [
+                "handle"
+              ]
+            },
+            "description": "Return a collection by its handle."
+          },
+          "collectionSavedSearches": {
+            "$ref": "#/shapes/SavedSearchConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.priceRuleSavedSearches` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of the shop's collection saved searches."
+          },
+          "collections": {
+            "$ref": "#/shapes/CollectionConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.collections` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "TITLE",
+                    "UPDATED_AT",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `collection_type`\n - `publishable_status`\n - `published_status`\n - `title`\n - `updated_at`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                },
+                "savedSearchId": {
+                  "type": "string",
+                  "@tag": "id",
+                  "description": "ID of an existing saved search.\nThe search’s query string is used as the query argument."
+                }
+              }
+            },
+            "description": "List of the shop's collections."
+          },
+          "contactEmail": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "contactEmail"
+            },
+            "description": "The public-facing contact email address for the shop.\nCustomers will use this email to communicate with the shop owner."
+          },
+          "countriesInShippingZones": {
+            "$ref": "#/shapes/CountriesInShippingZones/schema",
+            "description": "Countries that have been defined in shipping zones for the shop."
+          },
+          "currencyCode": {
+            "description": "The three letter code for the shop's currency.",
+            "enum": [
+              "USD",
+              "EUR",
+              "GBP",
+              "CAD",
+              "AFN",
+              "ALL",
+              "DZD",
+              "AOA",
+              "ARS",
+              "AMD",
+              "AWG",
+              "AUD",
+              "BBD",
+              "AZN",
+              "BDT",
+              "BSD",
+              "BHD",
+              "BIF",
+              "BYR",
+              "BZD",
+              "BMD",
+              "BTN",
+              "BAM",
+              "BRL",
+              "BOB",
+              "BWP",
+              "BND",
+              "BGN",
+              "MMK",
+              "KHR",
+              "CVE",
+              "KYD",
+              "XAF",
+              "CLP",
+              "CNY",
+              "COP",
+              "KMF",
+              "CDF",
+              "CRC",
+              "HRK",
+              "CZK",
+              "DKK",
+              "DJF",
+              "DOP",
+              "XCD",
+              "EGP",
+              "ETB",
+              "FKP",
+              "XPF",
+              "FJD",
+              "GIP",
+              "GMD",
+              "GHS",
+              "GTQ",
+              "GYD",
+              "GEL",
+              "GNF",
+              "HTG",
+              "HNL",
+              "HKD",
+              "HUF",
+              "ISK",
+              "INR",
+              "IDR",
+              "ILS",
+              "IRR",
+              "IQD",
+              "JMD",
+              "JPY",
+              "JEP",
+              "JOD",
+              "KZT",
+              "KES",
+              "KWD",
+              "KGS",
+              "LAK",
+              "LVL",
+              "LBP",
+              "LSL",
+              "LRD",
+              "LYD",
+              "LTL",
+              "MGA",
+              "MKD",
+              "MOP",
+              "MWK",
+              "MVR",
+              "MXN",
+              "MYR",
+              "MUR",
+              "MDL",
+              "MAD",
+              "MNT",
+              "MZN",
+              "NAD",
+              "NPR",
+              "ANG",
+              "NZD",
+              "NIO",
+              "NGN",
+              "NOK",
+              "OMR",
+              "PAB",
+              "PKR",
+              "PGK",
+              "PYG",
+              "PEN",
+              "PHP",
+              "PLN",
+              "QAR",
+              "RON",
+              "RUB",
+              "RWF",
+              "WST",
+              "SHP",
+              "SAR",
+              "STD",
+              "RSD",
+              "SCR",
+              "SLL",
+              "SGD",
+              "SDG",
+              "SYP",
+              "ZAR",
+              "KRW",
+              "SSP",
+              "SBD",
+              "LKR",
+              "SRD",
+              "SZL",
+              "SEK",
+              "CHF",
+              "TWD",
+              "THB",
+              "TJS",
+              "TZS",
+              "TOP",
+              "TTD",
+              "TND",
+              "TRY",
+              "TMT",
+              "UGX",
+              "UAH",
+              "AED",
+              "UYU",
+              "UZS",
+              "VUV",
+              "VEF",
+              "VND",
+              "XOF",
+              "YER",
+              "ZMW"
+            ],
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "currencyCode"
+            }
+          },
+          "currencyFormats": {
+            "$ref": "#/shapes/CurrencyFormats/schema",
+            "description": "How currencies are displayed on your store."
+          },
+          "currencySettings": {
+            "$ref": "#/shapes/CurrencySettingConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "The currency settings for the shop."
+          },
+          "customerAccounts": {
+            "description": "The shop's customer account requirement preference.",
+            "enum": [
+              "REQUIRED",
+              "OPTIONAL",
+              "DISABLED"
+            ],
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "customerAccounts"
+            }
+          },
+          "customerSavedSearches": {
+            "$ref": "#/shapes/SavedSearchConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.customerSavedSearches` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "NAME",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `name`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                }
+              }
+            },
+            "description": "List of the shop's customer saved searches."
+          },
+          "customerTags": {
+            "$ref": "#/shapes/StringConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                }
+              },
+              "required": [
+                "first"
+              ]
+            },
+            "description": "A comma separated list of tags that have been added to customer accounts."
+          },
+          "customers": {
+            "$ref": "#/shapes/CustomerConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.customers` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "NAME",
+                    "LOCATION",
+                    "ORDERS_COUNT",
+                    "LAST_ORDER_DATE",
+                    "TOTAL_SPENT",
+                    "UPDATED_AT",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `accepts_marketing`\n - `country`\n - `customer_date`\n - `email`\n - `last_abandoned_order_date`\n - `order_date`\n - `orders_count`\n - `phone`\n - `state`\n - `tag`\n - `total_spent`\n - `updated_at`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)."
+                }
+              }
+            },
+            "description": "Customer accounts associated to the shop."
+          },
+          "description": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "description"
+            },
+            "description": "The shop's meta description used in search engine results."
+          },
+          "domains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/Domain/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "domains"
+            },
+            "description": "The domains configured for the shop."
+          },
+          "draftOrderSavedSearches": {
+            "$ref": "#/shapes/SavedSearchConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.draftOrderSavedSearches` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of the shop's draft order saved searches."
+          },
+          "draftOrderTags": {
+            "$ref": "#/shapes/StringConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                }
+              },
+              "required": [
+                "first"
+              ]
+            },
+            "description": "A comma separated list of tags that have been added to draft orders."
+          },
+          "draftOrders": {
+            "$ref": "#/shapes/DraftOrderConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.draftOrders` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "NUMBER",
+                    "UPDATED_AT",
+                    "STATUS",
+                    "TOTAL_PRICE",
+                    "CUSTOMER_NAME",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `created_at`\n - `customer_id`\n - `status`\n - `tag`\n - `updated_at`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                }
+              }
+            },
+            "description": "List of saved draft orders on the shop."
+          },
+          "email": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "email"
+            },
+            "description": "The shop owner's email address.\nShopify will use this email address to communicate with the shop owner."
+          },
+          "enabledPresentmentCurrencies": {
+            "type": "array",
+            "items": {
+              "description": "Currency codes.",
+              "enum": [
+                "USD",
+                "EUR",
+                "GBP",
+                "CAD",
+                "AFN",
+                "ALL",
+                "DZD",
+                "AOA",
+                "ARS",
+                "AMD",
+                "AWG",
+                "AUD",
+                "BBD",
+                "AZN",
+                "BDT",
+                "BSD",
+                "BHD",
+                "BIF",
+                "BYR",
+                "BZD",
+                "BMD",
+                "BTN",
+                "BAM",
+                "BRL",
+                "BOB",
+                "BWP",
+                "BND",
+                "BGN",
+                "MMK",
+                "KHR",
+                "CVE",
+                "KYD",
+                "XAF",
+                "CLP",
+                "CNY",
+                "COP",
+                "KMF",
+                "CDF",
+                "CRC",
+                "HRK",
+                "CZK",
+                "DKK",
+                "DJF",
+                "DOP",
+                "XCD",
+                "EGP",
+                "ETB",
+                "FKP",
+                "XPF",
+                "FJD",
+                "GIP",
+                "GMD",
+                "GHS",
+                "GTQ",
+                "GYD",
+                "GEL",
+                "GNF",
+                "HTG",
+                "HNL",
+                "HKD",
+                "HUF",
+                "ISK",
+                "INR",
+                "IDR",
+                "ILS",
+                "IRR",
+                "IQD",
+                "JMD",
+                "JPY",
+                "JEP",
+                "JOD",
+                "KZT",
+                "KES",
+                "KWD",
+                "KGS",
+                "LAK",
+                "LVL",
+                "LBP",
+                "LSL",
+                "LRD",
+                "LYD",
+                "LTL",
+                "MGA",
+                "MKD",
+                "MOP",
+                "MWK",
+                "MVR",
+                "MXN",
+                "MYR",
+                "MUR",
+                "MDL",
+                "MAD",
+                "MNT",
+                "MZN",
+                "NAD",
+                "NPR",
+                "ANG",
+                "NZD",
+                "NIO",
+                "NGN",
+                "NOK",
+                "OMR",
+                "PAB",
+                "PKR",
+                "PGK",
+                "PYG",
+                "PEN",
+                "PHP",
+                "PLN",
+                "QAR",
+                "RON",
+                "RUB",
+                "RWF",
+                "WST",
+                "SHP",
+                "SAR",
+                "STD",
+                "RSD",
+                "SCR",
+                "SLL",
+                "SGD",
+                "SDG",
+                "SYP",
+                "ZAR",
+                "KRW",
+                "SSP",
+                "SBD",
+                "LKR",
+                "SRD",
+                "SZL",
+                "SEK",
+                "CHF",
+                "TWD",
+                "THB",
+                "TJS",
+                "TZS",
+                "TOP",
+                "TTD",
+                "TND",
+                "TRY",
+                "TMT",
+                "UGX",
+                "UAH",
+                "AED",
+                "UYU",
+                "UZS",
+                "VUV",
+                "VEF",
+                "VND",
+                "XOF",
+                "YER",
+                "ZMW"
+              ]
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "enabledPresentmentCurrencies"
+            },
+            "description": "The presentment currencies enabled for the shop."
+          },
+          "features": {
+            "$ref": "#/shapes/ShopFeatures/schema",
+            "description": "The shop's features."
+          },
+          "fulfillmentOrders": {
+            "$ref": "#/shapes/FulfillmentOrderConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "includeClosed": {
+                  "type": "boolean",
+                  "description": "Whether to include closed fulfillment orders."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `assigned_location_id`\n - `status`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)."
+                }
+              }
+            },
+            "description": "Paginated list of merchant-managed and third-party fulfillment orders."
+          },
+          "fulfillmentServices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/FulfillmentService/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "fulfillmentServices"
+            },
+            "description": "List of the shop's installed fulfillment services."
+          },
+          "ianaTimezone": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "ianaTimezone"
+            },
+            "description": "The shop's time zone as defined by the IANA."
+          },
+          "id": {
+            "type": "string",
+            "@tag": "id",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "id"
+            },
+            "description": "Globally unique identifier."
+          },
+          "inventoryItems": {
+            "$ref": "#/shapes/InventoryItemConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.inventoryItems` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `created_at`\n - `id`\n - `sku`\n - `updated_at`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                }
+              }
+            },
+            "description": "List of the shop's inventory items."
+          },
+          "limitedPendingOrderCount": {
+            "$ref": "#/shapes/LimitedPendingOrderCount/schema",
+            "description": "The number of pendings orders on the shop.\nLimited to a maximum of 10000."
+          },
+          "locations": {
+            "$ref": "#/shapes/LocationConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.locations` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "NAME",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `active`\n - `address1`\n - `address2`\n - `city`\n - `country`\n - `legacy`\n - `name`\n - `province`\n - `zip`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                },
+                "includeLegacy": {
+                  "type": "boolean",
+                  "description": "If true, also include the legacy locations of fulfillment services."
+                },
+                "includeInactive": {
+                  "type": "boolean",
+                  "description": "If true, also include the locations that are deactivated."
+                }
+              }
+            },
+            "description": "List of active locations of the shop."
+          },
+          "marketingEvents": {
+            "$ref": "#/shapes/MarketingEventConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.marketingEvents` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "STARTED_AT",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `app_id`\n - `description`\n - `started_at`\n - `type`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                }
+              }
+            },
+            "description": "List of a shop's marketing events."
+          },
+          "metafield": {
+            "$ref": "#/shapes/Metafield/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "Container for a set of metafields (maximum of 20 characters)."
+                },
+                "key": {
+                  "type": "string",
+                  "description": "Identifier for the metafield (maximum of 30 characters)."
+                }
+              },
+              "required": [
+                "namespace",
+                "key"
+              ]
+            },
+            "description": "The metafield associated with the resource."
+          },
+          "metafields": {
+            "$ref": "#/shapes/MetafieldConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "Finds all metafields with a specific namespace under the resource."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "A paginated list of metafields associated with the resource."
+          },
+          "myshopifyDomain": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "myshopifyDomain"
+            },
+            "description": "The shop's .myshopify.com domain name."
+          },
+          "name": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "name"
+            },
+            "description": "The shop's name."
+          },
+          "navigationSettings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/NavigationItem/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "navigationSettings"
+            },
+            "description": "The navigation settings of the shop."
+          },
+          "orderNumberFormatPrefix": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "orderNumberFormatPrefix"
+            },
+            "description": "The prefix that appears before order numbers."
+          },
+          "orderNumberFormatSuffix": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "orderNumberFormatSuffix"
+            },
+            "description": "The suffix that appears after order numbers."
+          },
+          "orderSavedSearches": {
+            "$ref": "#/shapes/SavedSearchConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.orderSavedSearches` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of the shop's order saved searches."
+          },
+          "orderTags": {
+            "$ref": "#/shapes/StringConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "sort": {
+                  "description": "Sort type.",
+                  "enum": [
+                    "ALPHABETICAL",
+                    "POPULAR"
+                  ]
+                }
+              },
+              "required": [
+                "first"
+              ]
+            },
+            "description": "A comma separated list of tags that have been added to orders."
+          },
+          "orders": {
+            "$ref": "#/shapes/OrderConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.orders` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "CREATED_AT",
+                    "CUSTOMER_NAME",
+                    "FINANCIAL_STATUS",
+                    "FULFILLMENT_STATUS",
+                    "ORDER_NUMBER",
+                    "PROCESSED_AT",
+                    "TOTAL_PRICE",
+                    "UPDATED_AT",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `cart_token`\n - `channel_id`\n - `chargeback_status`\n - `checkout_token`\n - `created_at`\n - `credit_card_last4`\n - `customer_id`\n - `delivery_method`\n - `discount_code`\n - `email`\n - `financial_status`\n - `fraud_protection_level`\n - `fulfillment_location_id`\n - `fulfillment_status`\n - `location_id`\n - `name`\n - `processed_at`\n - `reference_location_id`\n - `return_status`\n - `risk_level`\n - `sales_channel`\n - `source_identifier`\n - `source_name`\n - `status`\n - `tag`\n - `test`\n - `updated_at`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                }
+              }
+            },
+            "description": "List of orders placed on the shop."
+          },
+          "paymentSettings": {
+            "$ref": "#/shapes/PaymentSettings/schema",
+            "description": "Settings related to payments."
+          },
+          "pendingOrderCount": {
+            "type": "integer",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "pendingOrderCount"
+            },
+            "@deprecationReason": "Use `limitedPendingOrderCount` instead",
+            "description": "Number of pending orders on the shop."
+          },
+          "plan": {
+            "$ref": "#/shapes/ShopPlan/schema",
+            "description": "The shop's plan."
+          },
+          "priceRuleSavedSearches": {
+            "$ref": "#/shapes/SavedSearchConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.priceRuleSavedSearches` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of the shop's price rule saved searches."
+          },
+          "priceRules": {
+            "$ref": "#/shapes/PriceRuleConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.priceRules` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "STARTS_AT",
+                    "ENDS_AT",
+                    "TITLE",
+                    "CREATED_AT",
+                    "UPDATED_AT",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `created_at`\n - `discount_type`\n - `ends_at`\n - `starts_at`\n - `status`\n - `times_used`\n - `updated_at`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                },
+                "savedSearchId": {
+                  "type": "string",
+                  "@tag": "id",
+                  "description": "ID of an existing saved search.\nThe search’s query string is used as the query argument."
+                }
+              }
+            },
+            "description": "List of the shop’s price rules."
+          },
+          "primaryDomain": {
+            "$ref": "#/shapes/Domain/schema",
+            "description": "The shop's primary domain name."
+          },
+          "privateMetafield": {
+            "$ref": "#/shapes/PrivateMetafield/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "The namespace for the private metafield."
+                },
+                "key": {
+                  "type": "string",
+                  "description": "The key for the private metafield."
+                }
+              },
+              "required": [
+                "namespace",
+                "key"
+              ]
+            },
+            "description": "Returns a private metafield found by namespace and key."
+          },
+          "privateMetafields": {
+            "$ref": "#/shapes/PrivateMetafieldConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "namespace": {
+                  "type": "string",
+                  "description": "Filter the private metafields by namespace."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of private metafields."
+          },
+          "productByHandle": {
+            "$ref": "#/shapes/Product/schema",
+            "@deprecationReason": "Use `QueryRoot.productByHandle` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "handle": {
+                  "type": "string",
+                  "description": "The handle of the product."
+                }
+              },
+              "required": [
+                "handle"
+              ]
+            },
+            "description": "Return a product by its handle."
+          },
+          "productImages": {
+            "$ref": "#/shapes/ImageConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "CREATED_AT",
+                    "POSITION",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "maxWidth": {
+                  "type": "integer",
+                  "description": "Image width in pixels between 1 and 2048. This argument is deprecated: Use `maxWidth` on `Image.transformedSrc` instead."
+                },
+                "maxHeight": {
+                  "type": "integer",
+                  "description": "Image height in pixels between 1 and 2048. This argument is deprecated: Use\n`maxHeight` on `Image.transformedSrc` instead."
+                },
+                "crop": {
+                  "description": "Crops the image according to the specified region. This argument is\ndeprecated: Use `crop` on `Image.transformedSrc` instead.",
+                  "enum": [
+                    "CENTER",
+                    "TOP",
+                    "BOTTOM",
+                    "LEFT",
+                    "RIGHT"
+                  ]
+                },
+                "scale": {
+                  "type": "integer",
+                  "description": "Image size multiplier for high-resolution retina displays. Must be between 1\nand 3. This argument is deprecated: Use `scale` on `Image.transformedSrc` instead."
+                }
+              }
+            },
+            "description": "All images of all products of the shop."
+          },
+          "productSavedSearches": {
+            "$ref": "#/shapes/SavedSearchConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.productSavedSearches` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "List of the shop's product saved searches."
+          },
+          "productTags": {
+            "$ref": "#/shapes/StringConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                }
+              },
+              "required": [
+                "first"
+              ]
+            },
+            "description": "A comma separated list of tags that have been added to products."
+          },
+          "productTypes": {
+            "$ref": "#/shapes/StringConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                }
+              },
+              "required": [
+                "first"
+              ]
+            },
+            "description": "Types added to products."
+          },
+          "productVariants": {
+            "$ref": "#/shapes/ProductVariantConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.productVariants` instead.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "TITLE",
+                    "NAME",
+                    "SKU",
+                    "INVENTORY_QUANTITY",
+                    "INVENTORY_MANAGEMENT",
+                    "INVENTORY_LEVELS_AVAILABLE",
+                    "INVENTORY_POLICY",
+                    "FULL_TITLE",
+                    "POPULAR",
+                    "POSITION",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `barcode`\n - `collection`\n - `delivery_profile_id`\n - `gift_card`\n - `inventory_quantity`\n - `location_id`\n - `managed`\n - `managed_by`\n - `product_id`\n - `product_type`\n - `publishable_status`\n - `published_status`\n - `sku`\n - `tag`\n - `taxable`\n - `title`\n - `updated_at`\n - `vendor`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                }
+              }
+            },
+            "description": "List of the shop's product variants."
+          },
+          "productVendors": {
+            "$ref": "#/shapes/StringConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                }
+              },
+              "required": [
+                "first"
+              ]
+            },
+            "description": "Vendors added to products."
+          },
+          "products": {
+            "$ref": "#/shapes/ProductConnection/schema",
+            "@deprecationReason": "Use `QueryRoot.products`.",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "TITLE",
+                    "PRODUCT_TYPE",
+                    "VENDOR",
+                    "INVENTORY_TOTAL",
+                    "UPDATED_AT",
+                    "CREATED_AT",
+                    "PUBLISHED_AT",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "query": {
+                  "type": "string",
+                  "description": "Supported filter parameters:\n - `barcode`\n - `created_at`\n - `delivery_profile_id`\n - `error_feedback`\n - `gift_card`\n - `inventory_total`\n - `is_price_reduced`\n - `out_of_stock_somewhere`\n - `price`\n - `product_type`\n - `publishable_status`\n - `published_status`\n - `sku`\n - `status`\n - `tag`\n - `title`\n - `updated_at`\n - `vendor`\n\nSee the detailed [search syntax](https://help.shopify.com/api/getting-started/search-syntax)\nfor more information about using filters."
+                },
+                "savedSearchId": {
+                  "type": "string",
+                  "@tag": "id",
+                  "description": "ID of an existing saved search.\nThe search’s query string is used as the query argument."
+                }
+              }
+            },
+            "description": "List of the shop's products."
+          },
+          "publicationCount": {
+            "type": "integer",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "publicationCount"
+            },
+            "description": "Exposes the number of publications."
+          },
+          "resourceLimits": {
+            "$ref": "#/shapes/ShopResourceLimits/schema",
+            "description": "Resource limits of a shop."
+          },
+          "richTextEditorUrl": {
+            "description": "The URL of the rich text editor.",
+            "@tag": "URL",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "richTextEditorUrl"
+            }
+          },
+          "search": {
+            "$ref": "#/shapes/SearchResultConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "description": "The search query to filter by."
+                },
+                "types": {
+                  "type": "array",
+                  "items": {
+                    "description": "Specifies the type of resources to be returned from a search.",
+                    "enum": [
+                      "ORDER",
+                      "CUSTOMER",
+                      "PRODUCT",
+                      "ONLINE_STORE_PAGE",
+                      "ONLINE_STORE_BLOG",
+                      "ONLINE_STORE_ARTICLE",
+                      "COLLECTION",
+                      "DRAFT_ORDER",
+                      "PRICE_RULE"
+                    ]
+                  },
+                  "description": "The search result types to filter by."
+                },
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                }
+              },
+              "required": [
+                "query",
+                "first"
+              ]
+            },
+            "description": "Return admin search results."
+          },
+          "searchFilters": {
+            "$ref": "#/shapes/SearchFilterOptions/schema",
+            "description": "List of search filter options."
+          },
+          "setupRequired": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "setupRequired"
+            },
+            "description": "Whether the shop has outstanding setup steps."
+          },
+          "shipsToCountries": {
+            "type": "array",
+            "items": {
+              "description": "ISO 3166-1 alpha-2 country codes with some differences.",
+              "enum": [
+                "AF",
+                "AX",
+                "AL",
+                "DZ",
+                "AD",
+                "AO",
+                "AI",
+                "AG",
+                "AR",
+                "AM",
+                "AW",
+                "AU",
+                "AT",
+                "AZ",
+                "BS",
+                "BH",
+                "BD",
+                "BB",
+                "BY",
+                "BE",
+                "BZ",
+                "BJ",
+                "BM",
+                "BT",
+                "BO",
+                "BA",
+                "BW",
+                "BV",
+                "BR",
+                "IO",
+                "BN",
+                "BG",
+                "BF",
+                "BI",
+                "KH",
+                "CA",
+                "CV",
+                "BQ",
+                "KY",
+                "CF",
+                "TD",
+                "CL",
+                "CN",
+                "CX",
+                "CC",
+                "CO",
+                "KM",
+                "CG",
+                "CD",
+                "CK",
+                "CR",
+                "HR",
+                "CU",
+                "CW",
+                "CY",
+                "CZ",
+                "CI",
+                "DK",
+                "DJ",
+                "DM",
+                "DO",
+                "EC",
+                "EG",
+                "SV",
+                "GQ",
+                "ER",
+                "EE",
+                "SZ",
+                "ET",
+                "FK",
+                "FO",
+                "FJ",
+                "FI",
+                "FR",
+                "GF",
+                "PF",
+                "TF",
+                "GA",
+                "GM",
+                "GE",
+                "DE",
+                "GH",
+                "GI",
+                "GR",
+                "GL",
+                "GD",
+                "GP",
+                "GT",
+                "GG",
+                "GN",
+                "GW",
+                "GY",
+                "HT",
+                "HM",
+                "VA",
+                "HN",
+                "HK",
+                "HU",
+                "IS",
+                "IN",
+                "ID",
+                "IR",
+                "IQ",
+                "IE",
+                "IM",
+                "IL",
+                "IT",
+                "JM",
+                "JP",
+                "JE",
+                "JO",
+                "KZ",
+                "KE",
+                "KI",
+                "KP",
+                "XK",
+                "KW",
+                "KG",
+                "LA",
+                "LV",
+                "LB",
+                "LS",
+                "LR",
+                "LY",
+                "LI",
+                "LT",
+                "LU",
+                "MO",
+                "MG",
+                "MW",
+                "MY",
+                "MV",
+                "ML",
+                "MT",
+                "MQ",
+                "MR",
+                "MU",
+                "YT",
+                "MX",
+                "MD",
+                "MC",
+                "MN",
+                "ME",
+                "MS",
+                "MA",
+                "MZ",
+                "MM",
+                "NA",
+                "NR",
+                "NP",
+                "NL",
+                "AN",
+                "NC",
+                "NZ",
+                "NI",
+                "NE",
+                "NG",
+                "NU",
+                "NF",
+                "MK",
+                "NO",
+                "OM",
+                "PK",
+                "PS",
+                "PA",
+                "PG",
+                "PY",
+                "PE",
+                "PH",
+                "PN",
+                "PL",
+                "PT",
+                "QA",
+                "CM",
+                "RE",
+                "RO",
+                "RU",
+                "RW",
+                "BL",
+                "SH",
+                "KN",
+                "LC",
+                "MF",
+                "PM",
+                "WS",
+                "SM",
+                "ST",
+                "SA",
+                "SN",
+                "RS",
+                "SC",
+                "SL",
+                "SG",
+                "SX",
+                "SK",
+                "SI",
+                "SB",
+                "SO",
+                "ZA",
+                "GS",
+                "KR",
+                "SS",
+                "ES",
+                "LK",
+                "VC",
+                "SD",
+                "SR",
+                "SJ",
+                "SE",
+                "CH",
+                "SY",
+                "TW",
+                "TJ",
+                "TZ",
+                "TH",
+                "TL",
+                "TG",
+                "TK",
+                "TO",
+                "TT",
+                "TN",
+                "TR",
+                "TM",
+                "TC",
+                "TV",
+                "UG",
+                "UA",
+                "AE",
+                "GB",
+                "US",
+                "UM",
+                "UY",
+                "UZ",
+                "VU",
+                "VE",
+                "VN",
+                "VG",
+                "WF",
+                "EH",
+                "YE",
+                "ZM",
+                "ZW"
+              ]
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "shipsToCountries"
+            },
+            "description": "Countries that the shop ships to."
+          },
+          "shopifyPaymentsAccount": {
+            "$ref": "#/shapes/ShopifyPaymentsAccount/schema",
+            "@deprecationReason": "Use `QueryRoot.shopifyPaymentsAccount` instead.",
+            "description": "Shopify Payments account information, including balances and payouts."
+          },
+          "storefrontAccessTokens": {
+            "$ref": "#/shapes/StorefrontAccessTokenConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                }
+              }
+            },
+            "description": "Storefront access token of a private application. Scoped per-application."
+          },
+          "storefrontUrl": {
+            "description": "The URL of the shop's storefront.",
+            "@tag": "URL",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "storefrontUrl"
+            },
+            "@deprecationReason": "Use `url` instead"
+          },
+          "taxShipping": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "taxShipping"
+            },
+            "description": "Specifies whether or not taxes are charged for shipping."
+          },
+          "taxesIncluded": {
+            "type": "boolean",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "taxesIncluded"
+            },
+            "description": "The setting for whether applicable taxes are included in product prices."
+          },
+          "timezoneAbbreviation": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "timezoneAbbreviation"
+            },
+            "description": "The shop's time zone abbreviation."
+          },
+          "timezoneOffset": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "timezoneOffset"
+            },
+            "description": "The shop's time zone offset."
+          },
+          "timezoneOffsetMinutes": {
+            "type": "integer",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "timezoneOffsetMinutes"
+            },
+            "description": "The shop's time zone offset expressed in number of minutes."
+          },
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/PublishedTranslation/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "translations"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "locale": {
+                  "type": "string",
+                  "description": "Filters translations locale."
+                }
+              },
+              "required": [
+                "locale"
+              ]
+            },
+            "description": "The translations associated with the resource."
+          },
+          "unitSystem": {
+            "description": "The shop's unit system.",
+            "enum": [
+              "IMPERIAL_SYSTEM",
+              "METRIC_SYSTEM"
+            ],
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "unitSystem"
+            }
+          },
+          "uploadedImages": {
+            "$ref": "#/shapes/ImageConnection/schema",
+            "@args": {
+              "type": "object",
+              "properties": {
+                "first": {
+                  "type": "integer",
+                  "description": "Returns up to the first `n` elements from the list."
+                },
+                "after": {
+                  "type": "string",
+                  "description": "Returns the elements that come after the specified cursor."
+                },
+                "last": {
+                  "type": "integer",
+                  "description": "Returns up to the last `n` elements from the list."
+                },
+                "before": {
+                  "type": "string",
+                  "description": "Returns the elements that come before the specified cursor."
+                },
+                "reverse": {
+                  "type": "boolean",
+                  "description": "Reverse the order of the underlying list."
+                },
+                "sortKey": {
+                  "description": "Sort the underlying list by the given key.",
+                  "enum": [
+                    "CREATED_AT",
+                    "ID",
+                    "RELEVANCE"
+                  ]
+                },
+                "maxWidth": {
+                  "type": "integer",
+                  "description": "Image width in pixels between 1 and 2048. This argument is deprecated: Use `maxWidth` on `Image.transformedSrc` instead."
+                },
+                "maxHeight": {
+                  "type": "integer",
+                  "description": "Image height in pixels between 1 and 2048. This argument is deprecated: Use\n`maxHeight` on `Image.transformedSrc` instead."
+                },
+                "crop": {
+                  "description": "Crops the image according to the specified region. This argument is\ndeprecated: Use `crop` on `Image.transformedSrc` instead.",
+                  "enum": [
+                    "CENTER",
+                    "TOP",
+                    "BOTTOM",
+                    "LEFT",
+                    "RIGHT"
+                  ]
+                },
+                "scale": {
+                  "type": "integer",
+                  "description": "Image size multiplier for high-resolution retina displays. Must be between 1\nand 3. This argument is deprecated: Use `scale` on `Image.transformedSrc` instead."
+                }
+              }
+            },
+            "description": "All images uploaded to the shop."
+          },
+          "uploadedImagesByIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/shapes/Image/schema"
+            },
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "uploadedImagesByIds"
+            },
+            "@args": {
+              "type": "object",
+              "properties": {
+                "imageIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "@tag": "id"
+                  },
+                  "description": "The ids of uploaded images."
+                }
+              },
+              "required": [
+                "imageIds"
+              ]
+            },
+            "description": "Fetch list of images uploaded to shop by ids."
+          },
+          "url": {
+            "description": "The URL of the shop's storefront.",
+            "@tag": "URL",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "url"
+            }
+          },
+          "weightUnit": {
+            "description": "The shop's primary unit of weight for products and shipping.",
+            "enum": [
+              "KILOGRAMS",
+              "GRAMS",
+              "POUNDS",
+              "OUNCES"
+            ],
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "weightUnit"
+            }
+          }
+        },
+        "required": [
+          "alerts",
+          "analyticsToken",
+          "assignedFulfillmentOrders",
+          "availableChannelApps",
+          "billingAddress",
+          "channelCount",
+          "channels",
+          "checkoutApiSupported",
+          "collectionSavedSearches",
+          "collections",
+          "contactEmail",
+          "countriesInShippingZones",
+          "currencyCode",
+          "currencyFormats",
+          "currencySettings",
+          "customerAccounts",
+          "customerSavedSearches",
+          "customerTags",
+          "customers",
+          "domains",
+          "draftOrderSavedSearches",
+          "draftOrderTags",
+          "draftOrders",
+          "email",
+          "enabledPresentmentCurrencies",
+          "features",
+          "fulfillmentOrders",
+          "fulfillmentServices",
+          "ianaTimezone",
+          "id",
+          "inventoryItems",
+          "limitedPendingOrderCount",
+          "locations",
+          "marketingEvents",
+          "metafields",
+          "myshopifyDomain",
+          "name",
+          "navigationSettings",
+          "orderNumberFormatPrefix",
+          "orderNumberFormatSuffix",
+          "orderSavedSearches",
+          "orderTags",
+          "orders",
+          "paymentSettings",
+          "pendingOrderCount",
+          "plan",
+          "priceRuleSavedSearches",
+          "priceRules",
+          "primaryDomain",
+          "privateMetafields",
+          "productImages",
+          "productSavedSearches",
+          "productTags",
+          "productTypes",
+          "productVariants",
+          "productVendors",
+          "products",
+          "publicationCount",
+          "resourceLimits",
+          "richTextEditorUrl",
+          "search",
+          "searchFilters",
+          "setupRequired",
+          "shipsToCountries",
+          "storefrontAccessTokens",
+          "storefrontUrl",
+          "taxShipping",
+          "taxesIncluded",
+          "timezoneAbbreviation",
+          "timezoneOffset",
+          "timezoneOffsetMinutes",
+          "translations",
+          "unitSystem",
+          "uploadedImages",
+          "uploadedImagesByIds",
+          "url",
+          "weightUnit"
+        ]
+      }
+    },
+    "SEOInput": {
+      "name": "SEOInput",
+      "title": "SEOInput",
+      "id": "seoInput",
+      "description": "SEO information.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "title"
+            },
+            "description": "SEO title of the product."
+          },
+          "description": {
+            "type": "string",
+            "@source": {
+              "service": "shopify:seans-store-takeshape",
+              "path": "description"
+            },
+            "description": "SEO description of the product."
+          }
+        }
       }
     }
   },
