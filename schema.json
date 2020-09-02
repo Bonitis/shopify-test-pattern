@@ -156,10 +156,7 @@
                   "id": {
                     "type": "string",
                     "@tag": "id",
-                    "@source": {
-                      "path": "productId",
-                      "service": "parent"
-                    }
+                    "@mapping" "parent.productId"
                   }
                 },
                 "required": [
@@ -173,36 +170,25 @@
           },
           "rating": {
             "type": "integer",
-            "@source": {
-              "path": "ratingId",
-              "service": "takeshape:local:self"
-            }
+            "@mapping": "takeshape:local:Post.ratingId"
           },
           "productId": {
             "type": "string",
-            "@tag": "id"
+            "@tag": "id",
+            "@mapping": "takeshape:local:Post.productId"
           },
           "title": {
             "type": "string",
             "@l10n": true,
-            "@source": {
-              "path": "titleId",
-              "service": "takeshape:local:self"
-            }
+            "@mapping": "takeshape:local:Post.titleId"
           },
           "body": {
             "type": "string",
             "@l10n": true,
-            "@source": {
-              "path": "bodyId",
-              "service": "takeshape:local:self"
-            }
+            "@mapping": "takeshape:local:Post.bodyId"
           },
           "tags": {
-            "@source": {
-              "path": "tagsId",
-              "service": "takeshape:local:self"
-            },
+            "@mapping": "takeshape:local:Post.tagsId",
             "type": "array",
             "items": {
               "$ref": "#/shapes/TSRelationship/schema"
@@ -236,18 +222,12 @@
         "properties": {
           "description": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "description"
-            },
+            "@mapping": "shopify:seans-store-takeshape:SEO.description",
             "description": "SEO Description."
           },
           "title": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "title"
-            },
+            "@mapping": "shopify:seans-store-takeshape:SEO.title",
             "description": "SEO Title."
           }
         }
@@ -263,124 +243,80 @@
             "items": {
               "$ref": "#/shapes/Image/schema"
             },
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "images"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.images"
           },
           "publishedAt": {
             "type": "string",
             "format": "date-time",
             "@tag": "date",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "publishedAt"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.publishedAt",
           },
           "templateSuffix": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "templateSuffix"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.templateSuffix"
           },
           "availablePublicationCount": {
             "type": "integer",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "availablePublicationCount"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.availablePublicationCount"
           },
           "description": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "description"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.description"
           },
           "handle": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "handle"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.handle"
           },
           "title": {
             "type": "string",
             "@tag": "title",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "title"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.title"
           },
           "tags": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "tags"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.tags"
           },
           "createdAt": {
             "description": "The date and time ([ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601)) when the product was created.",
             "type": "string",
             "format": "date-time",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "createdAt"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.createdAt"
           },
           "featuredImage": {
             "$ref": "#/shapes/Image/schema",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "featuredImage"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.featuredImage"
           },
           "vendor": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "vendor"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.vendor"
           },
           "descriptionHtml": {
             "type": "string",
             "@tag": "html",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "descriptionHtml"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.descriptionHtml"
           },
           "id": {
             "type": "string",
             "@tag": "id",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "id"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.id"
           },
           "seo": {
             "$ref": "#/shapes/SEO/schema",
+            "@mapping": "shopify:seans-store-takeshape:Product.seo",
             "description": "SEO information of the product."
           },
           "productType": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "productType"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.productType"
           },
           "updatedAt": {
             "type": "string",
             "format": "date-time",
             "description": "The date and time ([ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601)) when the product was last modified.",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "updatedAt"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Product.updatedAt"
           }
         }
       },
@@ -394,33 +330,21 @@
         "properties": {
           "width": {
             "type": "number",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "width"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Image.width"
           },
           "id": {
             "type": "number",
             "@tag": "id",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "id"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Image.id"
           },
           "altText": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "altText"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Image.altText"
           },
           "src": {
             "type": "string",
             "@tag": "imageUrl",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "src"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Image.src"
           }
         }
       },
@@ -434,60 +358,40 @@
         "properties": {
           "vendor": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "vendor"
-            }
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.vendor"
           },
           "description": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "description"
-            }
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.description"
           },
           "descriptionHtml": {
             "type": "string",
             "@tag": "html",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "descriptionHtml"
-            }
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.descriptionHtml"
           },
           "handle": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "handle"
-            }
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.handle"
           },
           "seo": {
-            "$ref": "#/shapes/SEO/schema"
+            "$ref": "#/shapes/SEO/schema",
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.seo"
           },
           "title": {
             "type": "string",
             "@tag": "title",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "title"
-            }
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.title"
           },
           "productType": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "productType"
-            }
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.productType"
           },
           "tags": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "tags"
-            }
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.tags"
           }
         },
         "required": [
@@ -507,13 +411,11 @@
             "items": {
               "$ref": "#/shapes/ProductEdge/schema"
             },
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "edges"
-            }
+            "@mapping": "shopify:seans-store-takeshape:ProductConnection.edges"
           },
           "pageInfo": {
-            "$ref": "#/shapes/PageInfo/schema"
+            "$ref": "#/shapes/PageInfo/schema",
+            "@mapping": "shopify:seans-store-takeshape:ProductInput.pageInfo"
           }
         },
         "required": []
@@ -531,18 +433,12 @@
         "properties": {
           "hasNextPage": {
             "type": "boolean",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "hasNextPage"
-            },
+            "@mapping": "shopify:seans-store-takeshape:PageInfo.hasNextPage",
             "description": "Indicates if there are more pages to fetch."
           },
           "hasPreviousPage": {
             "type": "boolean",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "hasPreviousPage"
-            },
+            "@mapping": "shopify:seans-store-takeshape:PageInfo.hasPreviousPage",
             "description": "Indicates if there are any pages prior to the current page."
           }
         },
@@ -561,14 +457,12 @@
         "properties": {
           "cursor": {
             "type": "string",
-            "@source": {
-              "service": "shopify:seans-store-takeshape",
-              "path": "cursor"
-            },
+            "@mapping": "shopify:seans-store-takeshape:ProductEdge.cursor",
             "description": "A cursor for use in pagination."
           },
           "node": {
             "$ref": "#/shapes/Product/schema",
+            "@mapping": "shopify:seans-store-takeshape:ProductEdge.node",
             "description": "The item at the end of ProductEdge."
           }
         },
@@ -584,7 +478,8 @@
         "type": "object",
         "properties": {
           "product": {
-            "$ref": "#/shapes/Product/schema"
+            "$ref": "#/shapes/Product/schema",
+            "@mapping": "shopify:seans-store-takeshape:ProductCreatePayload.product",
           }
         }
       },
@@ -598,10 +493,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "@source": {
-              "path": "nameId",
-              "service": "takeshape:local:self"
-            }
+            "@mapping": "shopify:seans-store-takeshape:Tag.nameId"
           }
         },
         "required": [
