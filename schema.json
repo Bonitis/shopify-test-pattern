@@ -156,7 +156,7 @@
                   "id": {
                     "type": "string",
                     "@tag": "id",
-                    "@mapping" "parent.productId"
+                    "@mapping": "parent.productId"
                   }
                 },
                 "required": [
@@ -249,7 +249,7 @@
             "type": "string",
             "format": "date-time",
             "@tag": "date",
-            "@mapping": "shopify:seans-store-takeshape:Product.publishedAt",
+            "@mapping": "shopify:seans-store-takeshape:Product.publishedAt"
           },
           "templateSuffix": {
             "type": "string",
@@ -479,7 +479,7 @@
         "properties": {
           "product": {
             "$ref": "#/shapes/Product/schema",
-            "@mapping": "shopify:seans-store-takeshape:ProductCreatePayload.product",
+            "@mapping": "shopify:seans-store-takeshape:ProductCreatePayload.product"
           }
         }
       },
